@@ -13,7 +13,7 @@ const controlador = {
     // handlea /index/headerLogueado
     headerLogueado: function(req, res, next) {
         res.render('headerLogueado', { title: 'index' });
-      }
+      },
     
 }
 
