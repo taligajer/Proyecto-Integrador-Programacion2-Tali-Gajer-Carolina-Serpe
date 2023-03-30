@@ -13,7 +13,7 @@
 	<!-- Bootstrap Grid Stylesheet -->
 	<link rel="stylesheet" href="../css/bootstrap-grid.min.css">
 	<!-- Own Stylesheet -->
-	<link rel="stylesheet" href="../css/app.css">
+	<link rel="stylesheet" href="/css/app.css">
 </head>
 
 <body>
@@ -85,12 +85,16 @@
 				<h2 class="products-title">Editar mi perfil</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<h2 class="col-12"> <i>///////////////////////////////////////// <br> Acá va el formulario de edición de datos del perfil de usuario. <br>
-			Debe cumplir con los puntos de la consigna y ser coherente con la tabla de la base de datos deñ usuario<br>
-			Eliminen estás líneas y coloquen el formulario. <br>
-			Recuerden todo lo que necesita tanto la etiqueta form como los campos input para operar correctamtente</i> <br>
-			////////////////
-			</h2>
+<!-- preguntar con luis como se hace esta parte-->
+				<form action="." method="get">
+					<input type="email" name="email" id="email" placeholder="e-mail">
+					<input type="text" name="usuario" id="nombre de usuario" placeholder="Nombre de Usuario">
+					<input type="date" name="fecha de nacimiento" id="fecha de nacimiento" placeholder="Fecha de nacimiento">
+					<input type="number" name="nro de telefono" id="numero de telefono" placeholder="Numero de telefono">
+					<input type="text" name="foto de perfil" id="foto de perfil" placeholder="Foto de perfil">
+					<input type="submit" value="Enviar">
+				</form>
+				
 
 
 	<!-- footer -->
@@ -126,6 +130,7 @@
 		</div>
 	</footer>
 	<!-- /footer -->
+	<%- include('./partials/footer') %> 
 </body>
 
 </html>
