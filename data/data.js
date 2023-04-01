@@ -23,6 +23,8 @@ const comentarios = [{nombreUsuario: "Manuel",
     textoComentario: "Excelente producto",
     imagenPerfil: "./data/Default_pfp.png"}]
 
-module.exports = user; 
-module.exports = products; 
-module.exports = comentarios;
+module.exports = {
+    user,
+    products,
+    comentarios
+}

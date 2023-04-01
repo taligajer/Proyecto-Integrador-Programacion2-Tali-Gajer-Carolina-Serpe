@@ -1,7 +1,10 @@
+const data = require('../data/data');
+const productos = data.products;
+
 const controller = { 
     //la ruta handlea /product 
     product: function(req, res, next) {
-        res.render('product', { title: 'products' });
+        res.render('product', { title: "products", productName: productos });
       },
     // /product/product-add 
 
