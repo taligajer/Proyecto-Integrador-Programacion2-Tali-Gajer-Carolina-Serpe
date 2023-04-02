@@ -4,7 +4,7 @@ const productos = data.products;
 const controller = { 
     //la ruta handlea /product 
     product: function(req, res, next) {
-        res.render('product', { title: "products", productName: productos });
+        res.render('product', { title: "products", productName: productos.nombreProducto });
       },
     // /product/product-add 
 
