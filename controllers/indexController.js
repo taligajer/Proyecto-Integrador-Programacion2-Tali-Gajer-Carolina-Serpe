@@ -1,6 +1,9 @@
+const data = require('../data/data');
+const productos = data.products;
 const controlador = { 
     indexx: function(req, res, next) {
-        res.render('indexx', { title: 'index' });
+        const newProducts = productos;
+        res.render('indexx', { title: 'index', newProducts, mostCommentedProducts: newProducts.slice(0, 4)});
       },
     // handlea /indexx/register
     register: function(req, res, next) {
