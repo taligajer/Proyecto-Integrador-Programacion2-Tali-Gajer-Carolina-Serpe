@@ -1,5 +1,6 @@
 const data = require('../data/data');
 const productos = data.products;
+const user = data.user;
 
 const controller = { 
     //la ruta handlea /product 
@@ -10,7 +11,8 @@ const controller = {
     // /product/product-add 
 
     productAdd: function(req, res, next) {
-        res.render('product-add', { title: 'products' });
+      const newProducts = productos;
+        res.render('product-add', { title: 'products', newProducts, productName: productos.nombreProducto, username: user.usuario });
       },
     // /product/search-results 
     searchResults: function(req, res, next) {
