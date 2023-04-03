@@ -15,7 +15,7 @@ const controller = {
 
     // /users/profile/profile-edit
     profileEdit: function(req, res, next) {
-        res.render('profile-edit', {title: 'users'})
+        res.render('profile-edit', {title: 'users', username: user.usuario})
     },
 }
 
