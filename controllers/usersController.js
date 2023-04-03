@@ -17,6 +17,9 @@ const controller = {
     profileEdit: function(req, res, next) {
         res.render('profile-edit', {title: 'users', username: user.usuario})
     },
+    headerLogueado: function(req, res, next) {
+      res.render('headerLogueado', {title: 'users', username: user.usuario})
+  },
 }
 
 module.exports = controller;
