@@ -1,16 +1,18 @@
 const data = require('../data/data'); 
-
+const productos = data.products;
 const user = data.user;
 
 const controller = { 
     //la ruta handlea /users 
     users: function(req, res, next) {
-        res.render('users', { title: 'users' });
+      const usersList = user;
+        res.render('users', { title: 'users', usersList:usersList });
       },
     // /users/profile 
 
     profile: function(req, res, next) {
-        res.render('profile', { title: 'users', username: user.usuario});
+      const newProducts = productos;
+        res.render('profile', { title: 'users', username: user.usuario, newProducts});
       },
 
     // /users/profile/profile-edit
