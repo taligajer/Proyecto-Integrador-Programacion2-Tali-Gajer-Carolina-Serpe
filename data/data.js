@@ -21,6 +21,24 @@ fechaCarga:'7/12/2023', comentarios: "Excelente producto"}]
 
 const comentarios = [{nombreUsuario: "Manuel",
     textoComentario: "Excelente producto",
+    imagenPerfil: "Default_pfp.png"}, {nombreUsuario: "Camila",
+    textoComentario:"De los mejores",
+    imagenPerfil: "Default_pfp.png"}, {nombreUsuario: "Julieta",
+    textoComentario: "Excelente producto",
+    imagenPerfil: "Default_pfp.png"}, {nombreUsuario: "Alan",
+    textoComentario: "Muy buena calidad",
+    imagenPerfil: "Default_pfp.png"}, {nombreUsuario: "Luis",
+    textoComentario: "El mejor de todos",
+    imagenPerfil: "Default_pfp.png"}, {nombreUsuario: "Tomas",
+    textoComentario: "Muy buen producto",
+    imagenPerfil: "Default_pfp.png"},{nombreUsuario: "Valentina",
+    textoComentario: "Excelente calidad",
+    imagenPerfil: "Default_pfp.png"}, {nombreUsuario: "Ezequiel",
+    textoComentario: "Muy lindo",
+    imagenPerfil: "Default_pfp.png"},{nombreUsuario: "Santiago",
+    textoComentario: "Excelente producto",
+    imagenPerfil: "Default_pfp.png"}, {nombreUsuario: "Catalina",
+    textoComentario: "Me encanto",
     imagenPerfil: "Default_pfp.png"}]
 
 module.exports = {
