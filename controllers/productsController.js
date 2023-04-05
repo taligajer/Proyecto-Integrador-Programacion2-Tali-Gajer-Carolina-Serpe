@@ -1,12 +1,14 @@
 const data = require('../data/data');
 const productos = data.products;
 const user = data.user;
+const comentarios = data.comentarios;
 
 const controller = { 
     //la ruta handlea /product 
     product: function(req, res, next) {
       const newProducts = productos;
-        res.render('product', { title: "products", newProducts, productName: productos.nombreProducto });
+      const newComments = comentarios;
+        res.render('product', { title: "products", newProducts, productName: productos.nombreProducto, newComments});
       },
     // /product/product-add 
 
