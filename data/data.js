@@ -1,12 +1,35 @@
-const  user = {
-    email: "manuel@gamil.com",
+const  user = [
+    {email: "manuel@gamil.com",
     usuario: "ManuelGomez",
     contraseña: "hola123",
     fechaNacimiento:'1/03/2001',
     dni: '45005986', 
-    fotoPerfil: "./images/users/default_pfp.png",
-    
-}
+    fotoPerfil: "/images/users/default_pfp.png"},
+    {email: "gajertali@gmail.com",
+    usuario: "Tali",
+    contraseña: "hola",
+    fechaNacimiento: "02/04/2003", 
+    dni: '47009876',
+    fotoPerfil: "/images/users/default_pfp.png"},
+    {email: "caserpe@gmail.com",
+    usuario: "Caro",
+    contraseña: "caro123",
+    fechaNacimiento: "05/12/2005",
+    dni: '458970654',
+    fotoPerfil: "/images/users/default_pfp.png"},
+    {email: "aguscagnoli@gmail.com",
+    usuario: "Agus",
+    contraseña: "agus123",
+    fechaNacimiento: "24/09/2007",
+    dni: '48004567',
+    fotoPerfil: "/images/users/default_pfp.png"},
+    {email: "lucia@gmail.com",
+    usuario: "Lucia",
+    contraseña: "luli123",
+    fechaNacimiento: "30/07/2002",
+    dni: '49876545',
+    fotoPerfil: "/images/users/default_pfp.png"}
+]
 // ver que onda si esto funciona o no --> tema de la imagen y como vincularla para que aparezca en las otras paginas que pide la consigna 
 // faltan poner 5 productos mas y la parte de comentarios 
 const products = [{imagen: "manta.jpeg", nombreProducto: "Manta Norwegian", descripcion: "Manta de 50x70 cm", fechaCarga:'4/03/2023', comentarios: "Execelnte producto", alt: "manta"},
