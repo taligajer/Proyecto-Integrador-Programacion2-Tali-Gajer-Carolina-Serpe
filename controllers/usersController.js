@@ -12,7 +12,8 @@ const controller = {
 
     profile: function(req, res, next) {
       const newProducts = productos;
-        res.render('profile', { title: 'users', username: user.usuario, newProducts});
+      const usersList = user;
+        res.render('profile', { title: 'users', username: user.usuario, newProducts, usersList: usersList});
       },
 
     // /users/profile/profile-edit
