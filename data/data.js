@@ -1,9 +1,10 @@
 const  user = {
     email: "manuel@gamil.com",
     usuario: "ManuelGomez",
+    contraseña: "hola123",
     fechaNacimiento:'1/03/2001',
-    numeroTel: '11-4859-9234', 
-    fotoPerfil: "default_pfp.png",
+    dni: '45005986', 
+    fotoPerfil: "./images/users/default_pfp.png",
     
 }
 // ver que onda si esto funciona o no --> tema de la imagen y como vincularla para que aparezca en las otras paginas que pide la consigna 
