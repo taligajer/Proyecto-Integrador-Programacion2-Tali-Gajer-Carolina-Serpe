@@ -18,7 +18,7 @@ const controller = {
       },
     // /product/search-results 
     searchResults: function(req, res, next) {
-        res.render('search-results', { title: 'products' });
+        res.render('search-results', { title: 'products' , newProducts: productos});
       },
 }
 
