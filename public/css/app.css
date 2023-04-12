@@ -5,7 +5,7 @@
 
 /*====== Variables ======*/
 :root {
-  --yellow: #c39cf9;
+  --yellow: hsl(265, 72%, 75%);
   --dark-blue: #03264C;
   --light-blue: #1259c3;
   --gray: #666666;
