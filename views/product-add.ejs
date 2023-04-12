@@ -3,17 +3,7 @@
 <!-- Include Head -->
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link width="" rel="shortcut icon" href="/images/logo-mercado-liebre.jpg" />
-
-	<title> TAC</title>
-	<!-- Font Awesome Stylesheet -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-	<!-- Bootstrap Grid Stylesheet -->
-	<link rel="stylesheet" href="../css/bootstrap-grid.min.css">
-	<!-- Own Stylesheet -->
-	<link rel="stylesheet" href="../css/app.css">
+	<%- include('./partials/head') %>
 </head>
 
 <body>
@@ -31,10 +21,19 @@
 			<h2 class="col-12"> 
 				<div>
 					<form action="." method="get">
-						<input type="file" name="imagen" id="imagen" placeholder="Imagen">
-						<input type="text" name="Nombre del producto" id="Nombre del producto" placeholder="Nombre del producto">
-						<input type="text" name="descripcion" id="descripcion" placeholder="Descripcion">
-						<input type="date" name="fecha" id="fecha" placeholder="Fecha">
+						<div>
+							<input type="file" name="imagen" id="imagen" placeholder="Imagen">
+						</div>
+						<div>
+							<input type="text" name="Nombre del producto" id="Nombre del producto" placeholder="Nombre del producto">
+						</div>
+						<div>
+							<input type="text" name="descripcion" id="descripcion" placeholder="Descripcion">
+						</div>
+						<div>
+							<input type="date" name="fecha" id="fecha" placeholder="Fecha">
+						</div>
+						
 					</form>
 				</div>
 			</h2>

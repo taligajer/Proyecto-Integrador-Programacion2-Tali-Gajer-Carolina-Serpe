@@ -3,22 +3,14 @@
 <!-- Include Head -->
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link width="" rel="shortcut icon" href="/images/logo-mercado-liebre.jpg" />
-
-	<title> TAC</title>
-	<!-- Font Awesome Stylesheet -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-	<!-- Bootstrap Grid Stylesheet -->
-	<link rel="stylesheet" href="/css/bootstrap-grid.min.css">
-	<!-- Own Stylesheet -->
-	<link rel="stylesheet" href="/css/app.css">
+	<%- include('./partials/head') %>
 </head>
 
 <body>
 	<!-- Header -->
-	<%- include("./partials/headerLogueado.ejs")  %>
+	<header>
+		<%- include("./partials/headerLogueado.ejs")  %>
+	</header>
 	<!-- /Header -->
 
 	<!-- Novedades -->
@@ -29,13 +21,27 @@
 			</div>
 			<!-- Show the "ultimos" products -->
 				<form action="." method="get">
-					<input type="email" name="email" id="email" placeholder="e-mail">
-					<input type="text" name="usuario" id="nombre de usuario" placeholder="Nombre de Usuario">
-					<input type="password" name="contraseña" id="contraseña" placeholder="contraseña">
-					<input type="date" name="fecha de nacimiento" id="fecha de nacimiento" placeholder="Fecha de nacimiento">
-					<input type="number" name="DNI" id="DNI" placeholder="DNI">
-					<input type="text" name="foto de perfil" id="foto de perfil" placeholder="Foto de perfil">
-					<input type="submit" value="Enviar">
+					<div>
+						<input type="email" name="email" id="email" placeholder="e-mail">
+					</div>
+					<div>
+						<input type="text" name="usuario" id="nombre de usuario" placeholder="Nombre de Usuario">
+					</div>
+					<div>
+						<input type="password" name="contraseña" id="contraseña" placeholder="contraseña">
+					</div>
+					<div>
+						<input type="date" name="fecha de nacimiento" id="fecha de nacimiento" placeholder="Fecha de nacimiento">
+					</div>
+					<div>
+						<input type="number" name="DNI" id="DNI" placeholder="DNI">
+					</div>
+					<div>
+						<input type="text" name="foto de perfil" id="foto de perfil" placeholder="Foto de perfil">
+					</div>
+					<div>
+						<input type="submit" value="Enviar">
+					</div>
 				</form>
 				
 
