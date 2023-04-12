@@ -13,15 +13,15 @@ const controller = {
     profile: function(req, res, next) {
       const newProducts = productos;
       const usersList = user;
-        res.render('profile', { title: 'users', username: user.usuario, newProducts, usersList: usersList});
+        res.render('profile', { title: 'users', username: user[0].usuario, newProducts, usersList: usersList});
       },
 
     // /users/profile/profile-edit
     profileEdit: function(req, res, next) {
-        res.render('profile-edit', {title: 'users', username: user.usuario})
+        res.render('profile-edit', {title: 'users', username: user[0].usuario})
     },
     headerLogueado: function(req, res, next) {
-      res.render('headerLogueado', {title: 'users', username: user.usuario})
+      res.render('headerLogueado', {title: 'users', username: user[0].usuario})
   },
 }
 
