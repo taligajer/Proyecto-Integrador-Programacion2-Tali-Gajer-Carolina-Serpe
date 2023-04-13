@@ -14,7 +14,7 @@ const controller = {
 
     productAdd: function(req, res, next) {
       const newProducts = productos;
-        res.render('product-add', { title: 'products', newProducts, productName: productos.nombreProducto, username: user.usuario });
+        res.render('product-add', { title: 'products', newProducts, productName: productos.nombreProducto, username: user[0].usuario });
       },
     // /product/search-results 
     searchResults: function(req, res, next) {

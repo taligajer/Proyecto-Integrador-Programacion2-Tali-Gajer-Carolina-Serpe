@@ -323,7 +323,6 @@ hr {
 .product-detail-info {
   border-right: 1px solid var(--light-gray);
   padding: 15px;
-  /* height: 100%; */
 }
 
 .product-detail-title {
@@ -474,7 +473,6 @@ hr {
 
 .formRegister{
   margin-left: 250px;
-  /*background-color: rgb(138, 38, 237);*/
 }
 
 
@@ -495,7 +493,6 @@ textarea.form-input {
   border-bottom: 1px solid #ccc;
   padding-bottom: 30px;
   font-size: 16px;
-  /* background-color: black; */
 }
 
 .foto-perfil{

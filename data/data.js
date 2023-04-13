@@ -30,8 +30,7 @@ const  user = [
     dni: '49876545',
     fotoPerfil: "/images/users/default_pfp.png"}
 ]
-// ver que onda si esto funciona o no --> tema de la imagen y como vincularla para que aparezca en las otras paginas que pide la consigna 
-// faltan poner 5 productos mas y la parte de comentarios 
+
 const products = [{imagen: "manta.jpeg", nombreProducto: "Manta Norwegian", descripcion: "Manta de 50x70 cm", fechaCarga:'4/03/2023', comentarios: "Execelnte producto", alt: "manta"},
 {imagen: "termo.jpeg", nombreProducto: "Termo", descripcion: "Termo para mate", fechaCarga: '23/09/2023', alt: "Termo", comentarios: "Excelente producto"}, 
 {imagen: "almohadon.jpeg", nombreProducto: "Almohadon", descripcion: "Almohadon", fechaCarga: '25/05/2023', comentarios: "Excelente producto", alt: "almohadon"}, 
