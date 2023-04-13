@@ -68,11 +68,6 @@ values (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
-(default, default, default, 'excelente producto');
-
-
-insert into comentarios (id, idPost, idUsuario, comentario)
-values (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
@@ -81,10 +76,6 @@ values (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
-(default, default, default, 'excelente producto');
-
-insert into comentarios (id, idPost, idUsuario, comentario)
-values (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
@@ -93,10 +84,9 @@ values (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
-(default, default, default, 'excelente producto');
-
-insert into comentarios (id, idPost, idUsuario, comentario)
-values (default, default, default, 'excelente producto'),
+(default, default, default, 'excelente producto'),
+(default, default, default, 'excelente producto'),
+(default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
 (default, default, default, 'excelente producto'),
