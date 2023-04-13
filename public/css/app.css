@@ -260,6 +260,13 @@ hr {
   box-shadow: 0 0 5px var(--green);
 }
 
+.add-product-container {
+  display: flex;
+  justify-content: center;
+  
+}
+
+
 /*====== Footer ======*/
 .main-footer {
   background-color: #ffffff;
