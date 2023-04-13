@@ -472,6 +472,11 @@ hr {
 
 .formRegister{
   margin-left: 250px;
+  background-color: rgb(211, 177, 244);
+}
+
+.formProductAdd{
+  background-color: rgb(211, 177, 244);
 }
 
 .error{
