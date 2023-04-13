@@ -20,18 +20,23 @@
 			<!-- Show the "ultimos" products -->
 			<h2 class="col-12 add-product-container"> 
 				<div>
-					<form action="." method="get">
+					<form action="." method="get" >
 						<div>
-							<input type="file" name="imagen" id="imagen" placeholder="Imagen">
+							<label for="imagen">Imagen:</label>
+							<input type="file" name="imagen" id="imagen" placeholder="Imagen" class="input">
 						</div>
 						<div>
-							<input type="text" name="Nombre del producto" id="Nombre del producto" placeholder="Nombre del producto">
+							<input type="text" name="Nombre del producto" id="Nombre del producto" placeholder="Nombre del producto" class="input">
 						</div>
 						<div>
-							<input type="text" name="descripcion" id="descripcion" placeholder="Descripcion">
+							<input type="text" name="descripcion" id="descripcion" placeholder="Descripcion" class="input">
 						</div>
 						<div>
-							<input type="date" name="fecha" id="fecha" placeholder="Fecha">
+							<label for="fecha">Fecha:</label>
+							<input type="date" name="fecha" id="fecha" placeholder="Fecha" class="input">
+						</div>
+						<div>
+							<input type="submit" value="Enviar" class="input">
 						</div>
 						
 					</form>
