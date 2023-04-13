@@ -1,5 +1,5 @@
 const  user = [
-    {email: "manuel@gamil.com",
+    {email: "manuel@gmail.com",
     usuario: "ManuelGomez",
     contraseña: "hola123",
     fechaNacimiento:'1/03/2001',
