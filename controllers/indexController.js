@@ -1,7 +1,10 @@
+const db = require('../database/models'); //demo
+const movie = db.movie;    //demo
 const data = require('../data/data');
 const productos = data.products;
-const controlador = { 
+const controlador = {
     indexx: function(req, res, next) {
+        movie.findAll().then(data).catch(err)
         const newProducts = productos;
         res.render('indexx', { title: 'index', newProducts, mostCommentedProducts: newProducts.slice(0, 4)});
       },
