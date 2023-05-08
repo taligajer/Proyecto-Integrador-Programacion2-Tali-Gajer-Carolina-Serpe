@@ -19,5 +19,6 @@ const controlador = {
       },
     
 }
+//Su responsabilidad es atender los distintos request del cliente y generar comunicación entre las vistas y los modelos.
 
 module.exports = controlador;

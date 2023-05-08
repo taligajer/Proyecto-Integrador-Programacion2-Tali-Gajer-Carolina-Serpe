@@ -21,6 +21,7 @@ values(default, "manuel@gmail.com", "hola123", "/images/users/default_pfp.png", 
 (default, "aguscagnoli@gmail.com", "agus123", "/images/users/default_pfp.png", "2007-09-24", "48004567"),
 (default, "lucia@gmail.com", "luli123", "/images/users/default_pfp.png", "2002-07-30", "49876545");
 
+
 create table products(
 id int unsigned primary key auto_increment,
 user_id int unsigned, 
