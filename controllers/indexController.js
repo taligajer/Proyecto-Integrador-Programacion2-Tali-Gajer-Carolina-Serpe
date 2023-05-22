@@ -1,5 +1,5 @@
 const db = require('../database/models'); //demo
-const movie = db.movie;    //demo
+const index = db.index;    //demo
 const data = require('../data/data');
 const productos = data.products;
 const controlador = {

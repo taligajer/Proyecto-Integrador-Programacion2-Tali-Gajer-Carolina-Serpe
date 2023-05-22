@@ -1,3 +1,5 @@
+const db = require('../database/models'); 
+const producto = db.Product;
 const data = require('../data/data');
 const productos = data.products;
 const user = data.user;
