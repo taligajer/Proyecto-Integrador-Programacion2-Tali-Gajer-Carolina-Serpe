@@ -38,5 +38,13 @@ module.exports = function (sequelize, datatypes){
     }
 
     const Usuario = sequelize.define(alias, cols, config);
+    Usuario.associate = function(models){
+        Usuario.associate = function(models){
+            Usuario.hasMany(models.Product, {
+                as: "ProdRealCom",
+                foreignKey: "user_id" //REVISAR
+            });
+        }
+    }
     return Usuario;
 }

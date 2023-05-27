@@ -32,5 +32,26 @@ module.exports = function (sequelize, datatypes){
     }
 
     const Producto = sequelize.define(alias, cols, config);
+    Producto.associate = function(models){
+        Producto.associate = function(models){
+            Producto.hasMany(models.Comentario, {
+                as: "ProdRelCom",
+                foreignKey: "idPost" //REVISAR
+            });
+        }
+    }
+    
+    Producto.associate = function(models){
+        Producto.associate = function(models){
+            Producto.belongsTo(models.Usuario, {
+                as: "ProdRelCom",
+                foreignKey: "user_id" //REVISAR
+            });
+        }
+    }
+
     return Producto;
+
 }
+
+    

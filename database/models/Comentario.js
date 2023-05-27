@@ -32,5 +32,13 @@ module.exports = function (sequelize, datatypes){
     }
 
     const Comentario = sequelize.define(alias, cols, config);
+    Comentario.associate = function(models){
+        Comentario.associate = function(models){
+            Comentario.belongsTo(models.Product, {
+                as: "ProdRelCom",
+                foreignKey: "idPost" //REVISAR
+            });
+        }
+    }
     return Comentario;
 }
