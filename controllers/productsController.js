@@ -1,11 +1,11 @@
-const db = require('../database/models'); 
-const producto = db.Product;
-const data = require('../data/data');
-const productos = data.products;
-const user = data.user;
-const comentarios = data.comentarios;
+//const db = require('../database/models'); 
+//const producto = db.Product;
+//const data = require('../data/data');
+//const productos = data.products;
+//const user = data.user;
+//const comentarios = data.comentarios;
 
-const controller = { 
+const controlador = { 
     //la ruta handlea /product 
     product: function(req, res, next) {
       const newProducts = productos;
@@ -24,11 +24,26 @@ const controller = {
       },
 }
 
-module.exports = controller;
 
-//findOne: function(req, res, next) 
+const db = require('../database/models'); 
+const producto = db.Product;
+const data = require('../data/data');
+const productos = data.products;
+const user = data.user;
+const comentarios = data.comentarios;
+const controller = {
+findOne: function(req, res, next) // cambiar por findAll
 {
-  //let id = req.params.id; 
-  //let criterio = {where: [{id:id}]}
+  let id = req.params.id; 
+  let criterio = {where: [{id:id}]}
+  Producto.findOne 
+  .then(function(data){
+    return res.render("index",{title:"Con findOne",data:[data]});
+ } )
+ .catch(function(err){console.log(err)})
+},
+
 
 }
+
+module.exports = controller;
