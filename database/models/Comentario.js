@@ -36,7 +36,7 @@ module.exports = function (sequelize, datatypes){
         Comentario.associate = function(models){
             Comentario.belongsTo(models.Product, {
                 as: "ProdRelCom",
-                foreignKey: "idPost" //REVISAR
+                foreignKey: "idPost"
             });
         }
     }

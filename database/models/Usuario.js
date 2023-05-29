@@ -42,7 +42,7 @@ module.exports = function (sequelize, datatypes){
         Usuario.associate = function(models){
             Usuario.hasMany(models.Product, {
                 as: "ProdRealCom",
-                foreignKey: "user_id" //REVISAR
+                foreignKey: "user_id"
             });
         }
     }

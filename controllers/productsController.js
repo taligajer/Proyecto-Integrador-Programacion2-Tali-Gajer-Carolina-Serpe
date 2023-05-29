@@ -1,13 +1,15 @@
 const db = require('../database/models'); 
 const producto = db.Product;
 const data = require('../data/data');
-const productos = data.products;
+const productos = data.Products;
 const user = data.user;
 const comentarios = data.comentarios;
 
 const controller = { 
     //la ruta handlea /product 
     product: function(req, res, next) {
+      //producto.findAll().then(result=>console.log(result))
+      console.log(producto);
       const newProducts = productos;
       const newComments = comentarios;
         res.render('product', { title: "products", newProducts, productName: productos.nombreProducto, newComments});

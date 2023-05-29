@@ -1,14 +1,15 @@
 //Su responsabilidad es atender los distintos request del cliente y generar comunicación entre las vistas y los modelos.
 // chequear 
 const db = require('../database/models'); 
-const index = db.index;  
-const data = require('../data/data');
-const productos = data.products;
+//const data = require('../data/data');
 const bcryptjs= require('bcryptjs');
-const User = db.User;
+const Product = db.Products
+const User = db.Usuario;
 const controlador = {
 indexx: function(req, res, next) {
-  index.findAll()
+ 
+  console.log();
+  Product.findAll()
   .then(function(data){
       return res.render("index", {title: 'index', data: data, mostCommentedProducts: data.slice(0, 4)})
   })
