@@ -5,9 +5,8 @@ const index = db.index;
 const data = require('../data/data');
 const productos = data.products;
 const bcryptjs= require('bcryptjs');
-const db = require('../database/models');
 const User = db.User;
-const controladorr = {
+const controlador = {
 indexx: function(req, res, next) {
   index.findAll()
   .then(function(data){

@@ -28,7 +28,7 @@ module.exports = controller;
 
 //findOne: function(req, res, next) 
 {
-  let id = req.params.id; 
-  let criterio = {where: [{id:id}]}
+  //let id = req.params.id; 
+  //let criterio = {where: [{id:id}]}
 
 }
