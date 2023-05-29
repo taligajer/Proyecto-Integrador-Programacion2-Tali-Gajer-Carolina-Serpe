@@ -28,3 +28,16 @@ const controller = {
 }
 
 module.exports = controller;
+
+// chequear 
+
+//const bcryptjs = requere('bcryptjs');
+//const db = requere('../database/models')
+//const usuarioo = db.Usuario;
+//const data = require('../data/data');
+//const productoss = data.products; 
+//const userr = data.user; 
+
+//let controllerr = {
+
+//}
