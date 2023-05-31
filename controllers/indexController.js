@@ -1,7 +1,9 @@
 //Su responsabilidad es atender los distintos request del cliente y generar comunicación entre las vistas y los modelos.
 // chequear 
 const db = require('../database/models'); 
-//const data = require('../data/data');
+const index = db.index;  //consultar Luis 
+const data = require('../data/data');
+const productos = data.products;
 const bcryptjs= require('bcryptjs');
 const Product = db.Products
 const User = db.Usuario;
