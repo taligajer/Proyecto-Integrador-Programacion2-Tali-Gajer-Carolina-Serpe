@@ -28,24 +28,25 @@ const controlador = {
 
 
 const db = require('../database/models'); 
-const producto = db.Product;
+const Product = db.Product;
 const data = require('../data/data');
 const productos = data.products;
 const user = data.user;
 const comentarios = data.comentarios;
+
+
 const controller = {
+  
 findOne: function(req, res, next) // cambiar por findAll
-{
-  let id = req.params.id; 
-  let criterio = {where: [{id:id}]}
-  producto.findOne() 
-  .then(function(data){
-    return res.render("indexx",{title:"Con findOne",data:[data]});
- } )
- .catch(function(err){console.log(err)})
-},
-
-
+  {
+    let id = req.params.id; 
+    let criterio = {where: [{id:id}]}
+    Product.findOne() 
+    .then(function(data){
+      return res.render("indexx",{title:"Con findOne",data:[data]});
+  } )
+  .catch(function(err){console.log(err)})
+  },
 }
 
 module.exports = controller;
