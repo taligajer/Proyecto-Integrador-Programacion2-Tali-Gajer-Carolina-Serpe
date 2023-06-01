@@ -12,7 +12,7 @@ module.exports = function (sequelize, datatypes){
         idUsuario: {
             type: datatypes.INTEGER
         },
-        Comentario:{
+        comentario:{
             type: datatypes.STRING
         },
         createdAt:{
@@ -28,7 +28,7 @@ module.exports = function (sequelize, datatypes){
     let config = {
         tableName: 'comentarios', //nombre de la tabla
         timestamps: false,
-        underscored: true
+        underscored: false
     }
 
     const Comentario = sequelize.define(alias, cols, config);

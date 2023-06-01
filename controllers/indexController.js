@@ -2,10 +2,8 @@
 // chequear 
 const db = require('../database/models'); 
 const index = db.index;  //consultar Luis 
-const data = require('../data/data');
-const productos = data.products;
 const bcryptjs= require('bcryptjs');
-const Product = db.Products
+const Product = db.Product;
 const User = db.Usuario;
 const controlador = {
 indexx: function(req, res, next) {

@@ -3,15 +3,15 @@ create schema catalogo;
 
 use catalogo;
 create table usuarios(
-id int unsigned primary key auto_increment,
-email varchar(150) not null,
-contrasenia varchar(500) not null,
-fotoPerfil varchar(200) not null,
-fecha date not null,
-dni int unsigned not null,
-createAt timestamp default current_timestamp,
-updateAt timestamp default current_timestamp on update current_timestamp,
-deleteAt timestamp null
+    id int unsigned primary key auto_increment,
+    email varchar(150) not null,
+    contrasenia varchar(500) not null,
+    fotoPerfil varchar(200) not null,
+    fecha date not null,
+    dni int unsigned not null,
+    createdAt timestamp default current_timestamp,
+    updatedAt timestamp default current_timestamp on update current_timestamp,
+    deletedAt timestamp null
 );
 
 insert into usuarios(id, email, contrasenia, fotoPerfil, fecha, dni)
@@ -23,14 +23,14 @@ values(default, "manuel@gmail.com", "hola123", "/images/users/default_pfp.png", 
 
 
 create table products(
-id int unsigned primary key auto_increment,
-user_id int unsigned, 
-nombreProducto varchar(200) not null,
-descripcion varchar(200)not null,
-foreign key (user_id) references usuarios(id),
-createdAt timestamp default current_timestamp,
-updatedAt timestamp default current_timestamp on update current_timestamp,
-deletedAt timestamp null
+    id int unsigned primary key auto_increment,
+    userId int unsigned, 
+    nombreProducto varchar(200) not null,
+    descripcion varchar(200)not null,
+    foreign key (userId) references usuarios(id),
+    createdAt timestamp default current_timestamp,
+    updatedAt timestamp default current_timestamp on update current_timestamp,
+    deletedAt timestamp null
 );
 
 insert into products(id, nombreProducto, descripcion)

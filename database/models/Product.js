@@ -1,5 +1,5 @@
 module.exports = function (sequelize, datatypes){
-    let alias = "Products";
+    let alias = "Product";
     let cols = {
         id: {
             autoIncrement: true,
@@ -9,7 +9,7 @@ module.exports = function (sequelize, datatypes){
         userId: {
             type:datatypes.INTEGER
         },
-        nombreProduct: {
+        nombreProducto: {
             type: datatypes.STRING
         },
         descripcion: {
@@ -28,7 +28,7 @@ module.exports = function (sequelize, datatypes){
     let config = {
         tableName: 'products', //nombre de la tabla
         timestamps: false,
-        underscored: true
+        underscored: false
     }
 
     const Producto = sequelize.define(alias, cols, config);
