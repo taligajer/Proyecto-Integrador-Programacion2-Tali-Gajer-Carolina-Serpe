@@ -9,15 +9,19 @@ const controlador = {
 indexx: function(req, res, next) {
  
   console.log();
-  Product.findAll()
+  Product.findAll({
+    order: [['createdAt', 'DESC']]
+  })
   .then(function(data){
-      return res.render("index", {title: 'index', data: data, mostCommentedProducts: data.slice(0, 4)})
+    console.log(data);
+    return res.render('indexx', {newProducts: data, mostCommentedProducts: data})
   })
   .catch(function(err){console.log(err)})
+  
 },
 
 store: function (req, res){
-  let passEncriptada = bcryptjs.hashSync(req.body.password,12);
+  let passEncriptada = bcryptjs.hashSync(req.body.password, 12); // aca no va un numero va el length de la contrasnia
   let user = {
     email: req.body.email, 
     contrasenia: passEncriptada,

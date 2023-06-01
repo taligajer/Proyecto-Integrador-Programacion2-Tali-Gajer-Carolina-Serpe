@@ -40,7 +40,7 @@ findOne: function(req, res, next) // cambiar por findAll
   let criterio = {where: [{id:id}]}
   producto.findOne() 
   .then(function(data){
-    return res.render("index",{title:"Con findOne",data:[data]});
+    return res.render("indexx",{title:"Con findOne",data:[data]});
  } )
  .catch(function(err){console.log(err)})
 },
