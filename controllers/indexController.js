@@ -7,13 +7,17 @@ const Product = db.Product;
 const User = db.Usuario;
 const controlador = {
 indexx: function(req, res, next) {
-  
+
   Product.findAll({
+    include: [
+      {association: "Producto"},
+      {association: "Usuario"}
+    ],
     order: [['createdAt', 'DESC']]
   })
   .then(function(data){
-    console.log(data);
-    return res.render('indexx', {newProducts: data, mostCommentedProducts: data}) // mostrar los mas comentados, no todos
+    newProducts = data
+    return res.render('indexx', {newProducts: data.slice(0,8), mostCommentedProducts: data.slice(0,8)}) // mostrar los mas comentados, no todos
   })
   .catch(function(err){console.log(err)})
   
