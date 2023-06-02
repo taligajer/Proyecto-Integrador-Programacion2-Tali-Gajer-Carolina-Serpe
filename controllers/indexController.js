@@ -9,9 +9,9 @@ const controlador = {
 indexx: function(req, res, next) {
 
   Product.findAll({
-    include: [
-      {association: "Producto"},
-      {association: "Usuario"}
+    include:[
+      {association: "ProdRelUsu"},
+      {association: "UsuaRelProd"}
     ],
     order: [['createdAt', 'DESC']]
   })
