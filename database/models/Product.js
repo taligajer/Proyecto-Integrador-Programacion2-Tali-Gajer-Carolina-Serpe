@@ -42,7 +42,7 @@ module.exports = function (sequelize, datatypes){
         Producto.associate = function(models){
             Producto.belongsTo(models.Usuario, {
                 as: "ProdRelUsu",
-                foreignKey: "user_id", //REVISAR
+                foreignKey: "userId", //REVISAR
                
             });
         }
