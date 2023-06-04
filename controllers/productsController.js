@@ -1,18 +1,18 @@
-//const db = require('../database/models'); 
-//const producto = db.Product;
+const db = require('../database/models'); 
+const producto = db.Product;
 //const data = require('../data/data');
 //const productos = data.products;
 //const user = data.user;
-//const comentarios = data.comentarios;
+//const comentarios = data.comentarios; esto despues se borra
 
-const controlador = { 
+/*const controlador = { 
     //la ruta handlea /product 
     product: function(req, res, next) {
       //producto.findAll().then(result=>console.log(result))
       console.log(producto);
       const newProducts = productos;
       const newComments = comentarios;
-        res.render('product', { title: "products", newProducts, productName: productos.nombreProducto, newComments});
+        res.render('product', { title: "products", newProducts: data.slice(0,8), mostCommentedProducts: data.slice(0,8), productName: productos.nombreProducto, newComments});
       },
     // /product/product-add 
 
@@ -24,29 +24,23 @@ const controlador = {
     searchResults: function(req, res, next) {
         res.render('search-results', { title: 'products' , newProducts: productos});
       },
-}
+} borrar despues de terminar controlador con db*/
 
-
-const db = require('../database/models'); 
-const Product = db.Product;
-const data = require('../data/data');
-const productos = data.products;
-const user = data.user;
-const comentarios = data.comentarios;
 
 
 const controller = {
   
-findOne: function(req, res, next) // cambiar por findAll
-  {
-    let id = req.params.id; 
-    let criterio = {where: [{id:id}]}
-    Product.findOne() 
-    .then(function(data){
-      return res.render("indexx",{title:"Con findOne",data:[data]});
-  } )
-  .catch(function(err){console.log(err)})
-  },
-}
+
+findOne: function(req, res, next) 
+{console.log('findOne funcion anda')
+  let id = req.params.id;
+  let criterio = { where: { id: id } }
+  producto.findOne(criterio)
+  .then(function(data){
+    return res.render("product",{title:"Con findOne",data:[data]})
+})
+.catch(function(err){console.log(err)})
+  
+}}
 
 module.exports = controller;

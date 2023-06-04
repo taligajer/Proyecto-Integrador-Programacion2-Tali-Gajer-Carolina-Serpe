@@ -12,7 +12,7 @@
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
-			<h2 class="products-title">Termo</h2> 
+			<h2 class="products-title"><%=data.id %></h2> 
 			<p class="product-detail-description">
 				<a href="/products/product-add">Editar</a>
 			</p>
@@ -22,8 +22,8 @@
 				<article class="col-12 col-lg-8 product-detail-info">
 					<img src="/images/products/termo.jpeg" alt="" class="product-detail-img">
 					<p class="product-detail-description">
-						Termo para mate</p>
-					<p> <%= user.email %></p> <!--REVISAR Y PARAMS-->
+						<%=data.id %></p>
+					<p> <%= user.email %></p> <!--REVISAR Y PARAMS. va a dar error porque user esta definido en data.js que no se usa en el controlador. para probar pagina borrar desde aca-->
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
