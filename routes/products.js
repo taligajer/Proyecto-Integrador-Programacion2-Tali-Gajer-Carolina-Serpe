@@ -3,6 +3,6 @@ var router = express.Router();
 const controller = require('../controllers/productsController');
 
 router.get('/:id',controller.findOne)
-//router.get('/product-add', controller.productAdd); cambiar el controler y despues modificar la ruta 
+router.get('/product-add', controller.productAdd); 
 //router.get('/search-results', controller.searchResults);
 module.exports = router;

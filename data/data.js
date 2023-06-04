@@ -1,4 +1,4 @@
-const  user = [
+const user = [
     {email: "manuel@gmail.com",
     usuario: "ManuelGomez",
     contraseña: "hola123",

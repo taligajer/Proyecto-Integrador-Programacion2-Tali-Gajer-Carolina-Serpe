@@ -1,9 +1,9 @@
 const db = require('../database/models'); 
 const producto = db.Product;
-//const data = require('../data/data');
-//const productos = data.products;
-//const user = data.user;
-//const comentarios = data.comentarios; esto despues se borra
+const datajs = require('../data/data');
+const productos = datajs.products;
+const user = datajs.user;
+const comentarios = datajs.comentarios;
 
 /*const controlador = { 
     //la ruta handlea /product 
@@ -16,10 +16,7 @@ const producto = db.Product;
       },
     // /product/product-add 
 
-    productAdd: function(req, res, next) {
-      const newProducts = productos;
-        res.render('product-add', { title: 'products', newProducts, productName: productos.nombreProducto, username: user[0].usuario });
-      },
+    
     // /product/search-results 
     searchResults: function(req, res, next) {
         res.render('search-results', { title: 'products' , newProducts: productos});
@@ -31,16 +28,21 @@ const producto = db.Product;
 const controller = {
   
 
-findOne: function(req, res, next) 
-{console.log('findOne funcion anda')
-  let id = req.params.id;
-  let criterio = { where: { id: id } }
-  producto.findOne(criterio)
-  .then(function(data){
-    return res.render("product",{title:"Con findOne",data:[data]})
-})
-.catch(function(err){console.log(err)})
-  
-}}
+  findOne: function(req, res, next) 
+  {console.log('findOne funcion anda') //si esto aparece en la consola la funcion esta devolviendo algo
+    let id = req.params.id;
+    let criterio = { where: { id: id } }
+    producto.findOne(criterio)
+    .then(function(data){
+      return res.render("product",{title:"Con findOne",data:[data]})
+  })
+  .catch(function(err){console.log(err)})
+    
+  },
+  productAdd: function(req, res, next) {
+    console.log('productAdd funcion anda')
+    const newProducts = productos;
+      res.render('product-add', { title: 'products', newProducts, productName: productos.nombreProducto, username: user[0].usuario });
+    },}
 
 module.exports = controller;

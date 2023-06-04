@@ -12,7 +12,7 @@
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
-			<h2 class="products-title"><%=data.id %></h2> 
+			<h2 class="products-title"><%=data[0].nombreProducto %></h2> 
 			<p class="product-detail-description">
 				<a href="/products/product-add">Editar</a>
 			</p>
@@ -22,31 +22,8 @@
 				<article class="col-12 col-lg-8 product-detail-info">
 					<img src="/images/products/termo.jpeg" alt="" class="product-detail-img">
 					<p class="product-detail-description">
-						<%=data.id %></p>
-					<p> <%= user.email %></p> <!--REVISAR Y PARAMS. va a dar error porque user esta definido en data.js que no se usa en el controlador. para probar pagina borrar desde aca-->
-				</article>
-				<div class="col-12 col-lg-4">
-					<section class="comments">
-						<% for(let i = 0; i < newComments.length; i++) { %>
-							<article>
-								<img src= "/images/users/Default_pfp.png" alt= "Imagen de perfil" + <%= newComments[i].imagenPerfil %> > <!--PREGUNTAR-->
-								<div class="data">
-									<p class="user">
-									<strong> <a href="/users/profile"><%= newComments[i].nombreUsuario %></a> </strong>
-									 <%= newComments[i].textoComentario %></p>
-								</div>
-							</article>
-						<% } %>	
-					</section>
-					<form class="form" action="" method="get">
-						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
-						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-					</form>
-					<hr>
-				</div>
-			</div>
-		</div>
-	</div>
+						<%=data[0].descripcion %></p>
+					
 	<!-- /product detail -->
 
 	<!-- footer -->
