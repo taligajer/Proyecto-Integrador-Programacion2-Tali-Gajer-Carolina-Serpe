@@ -33,17 +33,17 @@ create table products(
     deletedAt timestamp null
 );
 
-insert into products(id, nombreProducto, descripcion)
-values(default, "Manta Norwegian", "Manta de 50x70"),
-(default, "Termo", "Termo para mate"),
-(default, "Almohadon", "Almohadon"),
-(default, "Mesa", "Mesa de comedor"),
-(default, "Silla", "Silla de comedor"),
-(default,"Sillon", "Sillon para living"),
-(default, "Cama", "Cama de 2 plazas"),
-(default, "Mesa ratona", "Mesa ratona para lampara"),
-(default, "Lampara", "Lampara de mesa"),
-(default, "Mantel", "Mantel para mesa de comedor");
+insert into products(id, nombreProducto, descripcion, userId)
+values(default, "Manta Norwegian", "Manta de 50x70", 1),
+(default, "Termo", "Termo para mate", 2),
+(default, "Almohadon", "Almohadon", 3),
+(default, "Mesa", "Mesa de comedor", 4),
+(default, "Silla", "Silla de comedor", 5),
+(default,"Sillon", "Sillon para living", 1),
+(default, "Cama", "Cama de 2 plazas", 2),
+(default, "Mesa ratona", "Mesa ratona para lampara", 3),
+(default, "Lampara", "Lampara de mesa", 4),
+(default, "Mantel", "Mantel para mesa de comedor", 5);
 
 
 

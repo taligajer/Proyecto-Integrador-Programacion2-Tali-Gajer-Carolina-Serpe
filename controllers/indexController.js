@@ -36,10 +36,26 @@ store: function (req, res){
 login: function (req, res) {
   res.render('login')
 },
+register: function (req, res) {
+  res.render('register')
+},
 ingresar:(req,res)=>{
-  let encriptada= bcryptjs.hashSync("123",12)
-  let check= bcryptjs.compareSync(req.body.password,encriptada);
-  res.send({clave:check})
+  console.log(req.query)
+  let passEncriptada = bcryptjs.hashSync(req.query.password, 12);
+      let user = {
+        email: req.query.email,
+        contrasenia: passEncriptada
+      }
+      User.create(
+        {
+          email: req.query.email,
+          contrasenia: passEncriptada,
+          fotoPerfil: '',
+          fecha: '01-01-2023',
+          dni: 1
+        }
+      );
+      res.redirect('/users/headerLogueado');
 }, // consultar a Luis 
 
 searchresults: function(req, res) {

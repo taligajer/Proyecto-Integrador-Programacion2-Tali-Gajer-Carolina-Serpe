@@ -7,7 +7,7 @@ module.exports = function (sequelize, datatypes){
             type: datatypes.INTEGER 
         },
         email: {
-            type:datatypes.STRING(150)
+            type:datatypes.STRING
         },
         contrasenia: {
             type: datatypes.STRING(500)
