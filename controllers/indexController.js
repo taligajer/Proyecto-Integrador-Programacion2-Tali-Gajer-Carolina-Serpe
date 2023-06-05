@@ -52,9 +52,10 @@ ingresar:(req,res)=>{
           contrasenia: passEncriptada,
           fotoPerfil: '',
           fecha: '01-01-2023',
-          dni: 1
+          dni: 1,
+          user
         }
-      );
+      )
       res.redirect('/users/headerLogueado');
 }, // consultar a Luis 
 
@@ -73,7 +74,7 @@ searchresults: function(req, res) {
   })
     .then(newProducts => {
       if (newProducts) {
-        res.render('search-results', {newProducts,busqueda});
+        res.render('search-results', {newProducts,busqueda}); //PREGUNTAR
       }})
 }
 }
