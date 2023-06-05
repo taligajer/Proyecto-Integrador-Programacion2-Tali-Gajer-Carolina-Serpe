@@ -22,10 +22,12 @@ module.exports = function (sequelize, datatypes){
             type: datatypes.INTEGER
         },
         createdAt:{
-            type: datatypes.DATE
+            type: datatypes.DATE,
+            allowNull:true
         },
         updatedAt:{
-            type: datatypes.DATE
+            type: datatypes.DATE,
+            allowNull:true
         },
         deletedAt:{
             type: datatypes.DATE
@@ -38,9 +40,9 @@ module.exports = function (sequelize, datatypes){
     }
 
     const Usuario = sequelize.define(alias, cols, config);
-    Usuario.associate = function(models){
+        Usuario.associate = function(models){
             Usuario.hasMany(models.Product, {
-                as: "UsuaRelProd",
+                as: "usuarioComentario",
                 foreignKey: "userId"
             });
         }

@@ -8,11 +8,14 @@ const User = db.Usuario;
 const controlador = {
 indexx: function(req, res, next) {
   Product.findAll({
-    //include: 
-      //[{association: "UsuaRelProd"},
-      //{association: "ProdRelUsu"}],
-    order:[['createdAt', 'DESC']]
+    include: 
+      [{association: "comentario"},
+      {association: "usuarios"}],
+      order:[['createdAt', 'DESC']]
     })
+   
+    
+  
   .then(function(data){
     newProducts = data
     return res.render('indexx', {newProducts: data.slice(0,8), mostCommentedProducts: data.slice(0,8)}) // mostrar los mas comentados, no todos
@@ -43,12 +46,12 @@ ingresar:(req,res)=>{
   console.log(req.query)
   let passEncriptada = bcryptjs.hashSync(req.query.password, 12);
       let user = {
-        email: req.query.email,
+        email: req.body.email,
         contrasenia: passEncriptada
       }
       User.create(
         {
-          email: req.query.email,
+          email: req.body.email,
           contrasenia: passEncriptada,
           fotoPerfil: '',
           fecha: '01-01-2023',

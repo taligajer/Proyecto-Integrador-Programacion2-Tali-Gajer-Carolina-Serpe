@@ -15,43 +15,87 @@ const controller = {
 
     profile: function(req, res, next) {
       const newProducts = productos;
+      let id = req.params.id;
+      let relaciones = {
+        include: [
+          {association: 'usuarioComentario'}, 
+          {association: 'producto', include:[{association: 'producto'}]
+        
+        }
+        ]}
+         
+      },
+    Store : function(req, res, next){
+      let errors = {};
+      if (req.body.email == ""){
+        errors.message = "El campoemail esta vacio";
+        res.locals.errors = errors;
+        res.render("register")
+      }
+      else if (req.body.contrasenia == " "){
+        errors.message = "El campo contrasenia esta vacio";
+        res.locals.errors = errors;
+        res.render("register")
+      }
+      else{
+        let criterio = {
+          email: req.body.email}
+       
 
       usuario.findOne({
-        where: [{email: req.query.email}]
-      }).then(user => {
-        if (user == null) {
-          console.error('el usuario no existe')
-          // render vista con error
-          return
+        criterio
+      }).then(usuario => {
+        if (usuario == null) {
+        //creamos el usuario\\
+        let contraseniahash = bcryptjs.hashSync(req.body.contrasenia, usuario.contrasenia);
+        let user = {
+          email: req.body.email,
+          contrasenia: contraseniahash,
+          fecha: req.body.fecha,
+          dni: req.body.dni,
+          fotoPerfil: req.body.fotoPerfil
         }
-        let check = bcryptjs.compareSync(req.query.contrasenia, user.contrasenia);
-        if(check){
-          //req.session.user = user.dataValues;
-          //req.locals.user = user.dataValues;
-          if(req.query.recordarme === 'on'){
-            res.cookie("userId",user.dataValues.id,{maxAge:1000 *60 *10})
-          }
-          return res.render('profile', { title: 'users', username: user.email, newProducts, usersList });
-        }
-        else{
-          
-          errors.message = "Contraseña no coincide";
-          //Asignamos a locals.error el objeto errors 
+        usuario.create(user);
+        res.redirect('/users/profile')
+        } else {
+          errors.message = "El email ya existe";
           res.locals.errors = errors;
-          //renderizamos la vista con el error
-          res.render("addUser");
+          res.render('register')
         }
+        
+        // if(check){
+        //   req.session.usuario = usuario.dataValues;
+        //   req.locals.usuario = user.dataValues;
+        //   if(req.body.recordarme === 'on'){
+        //     res.cookie("userId",user.dataValues.id,{maxAge:1000 *60 *10})
+          // }
+          // return res.render('profile', { title: 'users', username: user.email, newProducts, usersList });
+        // }
+        // else{
+          
+        //   errors.message = "Contraseña no coincide";
+        //   //Asignamos a locals.error el objeto errors 
+        //   res.locals.errors = errors;
+        //   //renderizamos la vista con el error
+        //   res.render("register");//cambiar la vista 
+        // }
+        
+      }).catch(errors=>{
+        res.render(errors)
       })
-      },
+    
+      }
+    },
 
     // /users/profile/profile-edit
     profileEdit: function(req, res, next) {
-        res.render('profile-edit', {title: 'users', username: user[0].usuario})
+        res.render('profile-edit', {title: 'users', username: usuario[0].usuario})
     },
     headerLogueado: function(req, res, next) {
-      res.render('headerLogueado', {title: 'users', username: user[0].usuario})
-  },
+      res.render('product-add', {title: 'users', username: usuario.usuario})
+  }
 }
+
 
 module.exports = controller;
 
@@ -63,10 +107,3 @@ module.exports = controller;
 //const data = require('../data/data');
 //const productoss = data.products; 
 //const userr = data.user; 
-
-/*const controller = {
-
-  users: function(req, res, next) {
-    
-  }
-}*/
