@@ -29,7 +29,7 @@ const controller = {
   
 
   findOne: function(req, res, next) 
-  {console.log('findOne funcion anda') //si esto aparece en la consola la funcion esta devolviendo algo
+  {
     let id = req.params.id;
     let criterio = { where: { id: id } }
     producto.findOne(criterio)
@@ -40,7 +40,6 @@ const controller = {
     
   },
   productAdd: function(req, res, next) {
-    console.log('productAdd funcion anda')
     const newProducts = productos;
       res.render('product-add', { title: 'products', newProducts, productName: productos.nombreProducto, username: user[0].usuario });
     },}
