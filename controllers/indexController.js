@@ -18,7 +18,6 @@ indexx: function(req, res, next) {
    
   .then(function(data){
     newProducts = data
-    res.send(newProducts)
     return res.render('indexx', {newProducts: data.slice(0,8), mostCommentedProducts: data.slice(0,8)}) // mostrar los mas comentados, no todos
   })
   .catch(function(err){console.log(err)})
