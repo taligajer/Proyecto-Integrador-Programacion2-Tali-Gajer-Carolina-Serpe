@@ -5,6 +5,8 @@ const index = db.index;  //consultar Luis
 const bcryptjs= require('bcryptjs');
 const Product = db.Product;
 const User = db.Usuario;
+const op = db.sequelize.Op;
+
 const controlador = {
 indexx: function(req, res, next) {
   Product.findAll({
@@ -14,8 +16,6 @@ indexx: function(req, res, next) {
       order:[['createdAt', 'DESC']]
     })
    
-    
-  
   .then(function(data){
     newProducts = data
     return res.render('indexx', {newProducts: data.slice(0,8), mostCommentedProducts: data.slice(0,8)}) // mostrar los mas comentados, no todos
