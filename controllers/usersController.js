@@ -13,6 +13,11 @@ const controller = {
       },
     // /users/profile 
 
+    usersPost: function(req, res, next) {
+      res.send(req.body)
+        res.render('users', { title: 'users', usersList:usersList });
+      },
+
     profile: function(req, res, next) {
       const newProducts = productos;
       let id = req.params.id;
