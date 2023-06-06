@@ -37,12 +37,12 @@ store: function (req, res){
   Usuario.create(user);
   res.redirect('/indexx')
 },
-login: function (req, res) {
-  res.render('login')
-},
-register: function (req, res) {
-  res.render('register')
-},
+//login: function (req, res) {
+  //res.render('login')
+//},
+//register: function (req, res) {
+  //res.render('register')
+//},
 ingresar:(req,res)=>{
   console.log(req.query)
   let passEncriptada = bcryptjs.hashSync(req.query.password, 12);

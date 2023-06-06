@@ -98,7 +98,13 @@ const controller = {
     },
     headerLogueado: function(req, res, next) {
       res.render('product-add', {title: 'users', username: usuario.usuario})
-  }
+  },
+  login: function (req, res) {
+    res.render('login')
+  },
+  register: function (req, res) {
+    res.render('register')
+  },
 }
 
 
