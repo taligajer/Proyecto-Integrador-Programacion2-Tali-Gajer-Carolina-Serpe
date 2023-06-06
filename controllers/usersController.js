@@ -6,6 +6,46 @@ const usersList = data.user;
 const bcryptjs = require('bcryptjs');
 
 const controller = { 
+  register: function (req, res) {
+    res.render('register')
+  },
+  procesarRegister: function (req, res) {
+    let info = req.body;
+    let criterio = {where: [{email: info.email}]}; 
+    let errors = {};
+    if (info.email == " ") {
+      errors.message = "Hay un error. El email no puede estar vacio";
+      req.locals.errors = errors; // validamos que no viene vacio
+      return res.render("register");
+    }else if (info.contrasenia < 3) {
+      errors.message = "Hay un error. La contrasenia tiene que tener 3 caracteres o mas"
+      res.locals.errors = errors;
+      return res.render("register");
+    }else if (info.fecha == " ") {
+      errors.message = "Hay un error. El campo de fecha no puede estar vacio"
+      res.locals.errors = errors;
+    }
+    usuario.findOne({
+      criterio
+    }).then(usuario => {
+      if (usuario == null) {
+      //creamos el usuario\\
+      let contraseniahash = bcryptjs.hashSync(req.body.contrasenia, usuario.contrasenia);
+      let user = {
+        email: req.body.email,
+        contrasenia: contraseniahash,
+        fecha: req.body.fecha,
+        dni: req.body.dni,
+        fotoPerfil: req.body.fotoPerfil
+      }
+      usuario.create(user); 
+      res.redirect('/users/profile')
+      } else {
+        errors.message = "El email ya existe";
+        res.locals.errors = errors;
+        res.render('register')
+      }
+  })},
     //la ruta handlea /users 
     users: function(req, res, next) {
       const usersList = user;
@@ -66,6 +106,7 @@ const controller = {
           errors.message = "El email ya existe";
           res.locals.errors = errors;
           res.render('register')
+          
         }
         
         // if(check){
@@ -102,9 +143,7 @@ const controller = {
   login: function (req, res) {
     res.render('login')
   },
-  register: function (req, res) {
-    res.render('register')
-  },
+  
 }
 
 
