@@ -72,12 +72,12 @@ searchresults: function(req, res) {
         { descripcion: { [op.like]: `%${busqueda}%` } },
       ],
     },
-    include: [{model: Usuario, as: 'Usuario'},],
+    include: [{association: "usuarios"},],
     order: [['createdAt', 'DESC']],
   })
-    .then(newProducts => {
-      if (newProducts) {
-        res.render('search-results', {newProducts,busqueda}); //PREGUNTAR
+    .then(result => {
+      if (result) {
+        res.render('search-results', {resultado: result, palabraBuscada:busqueda}); //PREGUNTAR
       }})
 }
 }
