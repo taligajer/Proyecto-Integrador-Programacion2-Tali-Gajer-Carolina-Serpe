@@ -35,7 +35,7 @@
 								<p>Cargado por: <%= newProducts[i].usuarios.email%></p> <!--PREGUNTAR-->
 								<p><%= newProducts[i].descripcion %></p>
 								<p>Fecha de carga: <%= newProducts[i].createdAt %></p>
-								<p>Comentarios: <%= newProducts[i].comentarios  %></p> 
+								<p>Comentarios: <%= newProducts[i].comentario.comentarios  %></p> 
 							</article>
 						</a>
 					</section>
@@ -61,10 +61,11 @@
 								<img src= "/images/products/<%=newProducts[i].nombreProducto %>.jpeg" alt=<%= mostCommentedProducts[i].alt %>>
 							</figure>
 							<article class="product-box_data">
-								<h2><%= mostCommentedProducts[i].nombreProducto %></h2> 
+								<h2><%= mostCommentedProducts[i].nombreProducto %></h2>
+								<p>Cargado por: <%= newProducts[i].usuarios.email%></p> 
 								<p><%= mostCommentedProducts[i].descripcion %></p>
-								<p>Fecha de carga: <%= mostCommentedProducts[i].fechaCarga %></p>
-								<p>Comentarios: <%= mostCommentedProducts[i].comentarios  %></p>
+								<p>Fecha de carga: <%= mostCommentedProducts[i].createdAt %></p>
+								<p>Comentarios: <%= mostCommentedProducts[i].comentario.comentario  %></p>
 							</article>
 						</a>
 					</section>
