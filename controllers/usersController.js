@@ -1,5 +1,5 @@
 const db = require('../database/models');
-const usuario = db.Usuario; 
+const usuario = db.user; 
 const data = require('../data/data'); 
 const productos = data.products;
 const usersList = data.user;
@@ -132,6 +132,17 @@ const controller = {
     
       }
     },
+    login: function (req, res) {
+      res.render('login')
+    },
+    logout: function(req, res) {
+      let info = req.body;
+      if (info.logout != undefined){
+        req.session.destroy();
+        req.clearCookie("userId");
+        return res.redirect("/indexx");
+      }
+    },
 
     // /users/profile/profile-edit
     profileEdit: function(req, res, next) {
@@ -140,19 +151,12 @@ const controller = {
     headerLogueado: function(req, res, next) {
       res.render('product-add', {title: 'users', username: usuario.usuario})
   },
-  login: function (req, res) {
-    res.render('login')
-  },
-  
 }
 
 
 module.exports = controller;
 
 // chequear 
-
-//
-//const db = requere('../database/models')
 //const usuarioo = db.Usuario;
 //const data = require('../data/data');
 //const productoss = data.products; 
