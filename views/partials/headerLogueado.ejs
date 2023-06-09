@@ -50,34 +50,31 @@
 					<li><a href="/products/product-add">Cargar productos</a></li>
 				</ul>
 
-					<li class="right-navbar"><a href="/users/profile">
-							<%= username %><i class="fas fa-user"></i>
-						</a>
-					</li>
 
 				<ul class="right-navbar">
-					<li>
-						<form action="/" method="get">
-							<button class="logout" type="submit">
-							Cerrar sesión <i class="fas fa-sign-in-alt"></i>
-							</button>
-						</form>
-					</li>
-						<!-- Solo deslogueado <li>
-						<a href="/register">Creá tu cuenta <i class="far fa-address-card"></i>
+						<li>
+							<% if (locals.user == undefined) { %>
+						<a href="../register.ejs">Creá tu cuenta <i class="far fa-address-card"></i>
 						</a>
 						</li>
 						<li>
-						<a href="/login">Ingresá <i class="fas fa-sign-in-alt"></i></a>
-						</li> -->
+						<a href="../login.ejs">Ingresá <i class="fas fa-sign-in-alt"></i></a>
+						</li> <%} else{%>
+							<li>
+								<h3>Hola <%= locals.usuarios.email %></h3>
+								<a href = "../profile.ejs/"<%=usuario.id%>> Mi perfil</a> <!--ESTE NO ANDA-->
+								<a href="../product-add.ejs">Agergar producto</a>
+							</li>
+						<li>
+							<form action="/" method="get">
+								<button class="logout" type="submit">
+								Cerrar sesión <i class="fas fa-sign-in-alt"></i>
+								</button>
+							</form>
+						</li><%}%>
 				</ul>
 			</nav>	
 		</div>
-
-		<section>
-			<div class ="logout">
-				<button name="logout" type="submit" class="mandarBoton"> LOGOUT </button>
-			</div>
 		</section>
 	</header>
 	<!-- /Header -->	

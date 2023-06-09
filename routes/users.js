@@ -8,8 +8,8 @@ router.post('/profile', controller.profile);//ruta por POST que procesa la infor
 router.get('/register', controller.register); //este anda bien 
 router.post('/register', controller.procesarRegister);
 
-router.get('/login', controller.users);
-router.post('/login', controller.Store);// cambiar por otra 
+router.get('/login', controller.login);
+router.post('/login', controller.procesarLogin);// cambiar por otra 
 
 router.get('/logout', controller.logout); // crear lo que dice logout en el headerLogueado
 
