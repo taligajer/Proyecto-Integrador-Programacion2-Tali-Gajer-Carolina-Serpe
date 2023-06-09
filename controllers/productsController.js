@@ -46,8 +46,20 @@ const controller = {
     const newProducts = productos;
       res.render('product-add', { title: 'products', newProducts, productName: productos.nombreProducto, username: user[0].usuario });
     },
+
+  procesarAdd: function(req, res, next) {
+    let productadd = req.body
+    let add = {
+      usuario_id: productadd.session.id,
+      //imagen:
+      nombre: productadd.nombreProducto,
+      descripcion: productadd.descripcion,
+      fecha: productadd.fecha
+    }
+    res.redirect('/product-add', {productadd, add})
+  },
   
-    buscador: function(req, res, next) {
+  buscador: function(req, res, next) {
       
       let busqueda = req.query.search
     
