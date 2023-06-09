@@ -49,26 +49,24 @@ const controller = {
   
     buscador: function(req, res, next) {
       
-    let busqueda = req.query.search
+      let busqueda = req.query.search
     
-    let criterio = {
-      where: {
-        nombreProducto: {
-          [op.like]: "%"+busqueda+"%"
+      let criterio = {
+        where: {
+         nombreProducto: {
+            [op.like]: "%"+busqueda+"%"
+          }
         }
+      }; 
+      let relaciones = {
+        include: [
+          { association: "userRel" }
+        ]}
+      producto.findAll(criterio, relaciones)
+        .then(function(data){
+          res.render('search-results',{data:data})
+        })
       }
-    };
-  
-    let relaciones = {
-      include: [
-        { association: "userRel" }
-      ]}
- 
-  
-    producto.findAll(criterio, relaciones)
-      .then(function(data){
-        res.render('search-results',{data:data})
-      })}}
-
+}
 
 module.exports = controller;
