@@ -9,7 +9,7 @@ const controller = {
   register: function (req, res) {
     res.render('register')
   },
-  procesarRegister: function (req, res) {
+  procesarRegister: function (req, res) { //cambiar nombre de procesarRegister
     let info = req.body;
     let criterio = {where: [{email: info.email}]}; 
     let errors = {};
@@ -73,7 +73,7 @@ const controller = {
     Store : function(req, res, next){
       let errors = {};
       if (req.body.email == ""){
-        errors.message = "El campoemail esta vacio";
+        errors.message = "El campo email esta vacio";
         res.locals.errors = errors;
         res.render("register")
       }
@@ -134,6 +134,39 @@ const controller = {
     },
     login: function (req, res) {
       res.render('login')
+    },
+    procesarLogin: function(req, res) {
+      let info = req.body;
+      let criterioLogin = {where: [{email: info.email}]} ;
+      let errors = {};
+      if (info.email == " ") {
+        errors.message= "Hay un error. El email no puede estar vacio";
+        res.locals.errors = errors; 
+        return res.render('login');
+      }else{
+        usuario.findOne(
+          {criterioLogin
+          }).then(usuario => {
+            if (usuario == null) {
+              let check = bcryptjs.compareSync(info.contrasenia, usuario.contrasenia);
+              if (check) {
+                req.session.user = usuario.dataValues;
+                if (info.remember != undefined) {
+                  res.cookie('userId', usuario.dataValues.id, {
+                    maxAge: 1000 * 60 * 1000,
+                  });
+                }
+                return res.redirect("/indexx") // lo redirecciona al indexx
+              } else {
+                  errors.message = "La clave es incorrecta";
+                  res.locals.errors = errors;
+                  return res.render("login");
+               }
+              }
+          }) .catch(function(errors){
+            console.log(errors)
+          })
+      }
     },
     logout: function(req, res) {
       let info = req.body;
