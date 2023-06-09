@@ -4,6 +4,8 @@ const datajs = require('../data/data');
 const productos = datajs.products;
 const user = datajs.user;
 const comentarios = datajs.comentarios;
+let op = db.Sequelize.Op
+
 
 /*const controlador = { 
     //la ruta handlea /product 
@@ -35,6 +37,7 @@ const controller = {
     producto.findOne(criterio)
     .then(function(data){
       return res.render("product",{title:"Con findOne",data:[data]})
+      
   })
   .catch(function(err){console.log(err)})
     
@@ -42,6 +45,40 @@ const controller = {
   productAdd: function(req, res, next) {
     const newProducts = productos;
       res.render('product-add', { title: 'products', newProducts, productName: productos.nombreProducto, username: user[0].usuario });
-    },}
+    },
+
+  procesarAdd: function(req, res, next) {
+    let productadd = req.body
+    let add = {
+      usuario_id: productadd.session.id,
+      //imagen:
+      nombre: productadd.nombreProducto,
+      descripcion: productadd.descripcion,
+      fecha: productadd.fecha
+    }
+    res.redirect('/product-add', {productadd, add})
+  },
+  
+  buscador: function(req, res, next) {
+      
+      let busqueda = req.query.search
+    
+      let criterio = {
+        where: {
+         nombreProducto: {
+            [op.like]: "%"+busqueda+"%"
+          }
+        }
+      }; 
+      let relaciones = {
+        include: [
+          { association: "userRel" }
+        ]}
+      producto.findAll(criterio, relaciones)
+        .then(function(data){
+          res.render('search-results',{data:data})
+        })
+      }
+}
 
 module.exports = controller;
