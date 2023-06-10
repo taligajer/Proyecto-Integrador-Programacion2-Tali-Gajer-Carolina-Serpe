@@ -22,6 +22,7 @@ app.use(session({secret:"nuestro mensaje secreto",
                 resave: false,
                 saveUninitialized:true }));
 
+
 app.use('/', indexRouter); 
 app.use('/products', productsRouter); 
 app.use('/users', usersRouter)

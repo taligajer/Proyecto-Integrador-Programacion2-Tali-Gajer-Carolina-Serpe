@@ -32,10 +32,10 @@
 							</figure>
 							<article class="product-box_data">
 								<h2><%= newProducts[i].nombreProducto %></h2>
-								<p>Cargado por: <%= //newProducts[i].usuarios.email%></p> <!--PREGUNTAR-->
+								<p>Cargado por: <%= newProducts[i].usuarios.email%></p> <!--PREGUNTAR-->
 								<p><%= newProducts[i].descripcion %></p>
 								<p>Fecha de carga: <%= newProducts[i].createdAt %></p>
-								<p>Comentarios: <%= newProducts[i].comentario.comentarios  %></p> 
+								<p>Comentarios: <%= newProducts[i].comentario.length %></p> 
 							</article>
 						</a>
 					</section>
@@ -58,14 +58,14 @@
 					<section class="product-box">
 						<a href="/products/<%= newProducts[i].id %>">
 							<figure class="product-box_image">
-								<img src= "/images/products/<%=newProducts[i].nombreProducto %>.jpeg" alt=<%= mostCommentedProducts[i].alt %>>
+								<img src= "/images/products/<%=mostCommentedProducts[i].nombreProducto %>.jpeg" alt=<%= mostCommentedProducts[i].alt %>>
 							</figure>
 							<article class="product-box_data">
 								<h2><%= mostCommentedProducts[i].nombreProducto %></h2>
-								<p>Cargado por: <%= //newProducts[i].usuarios.email%></p> 
+								<p>Cargado por: <%= mostCommentedProducts[i].usuarios.email%></p> 
 								<p><%= mostCommentedProducts[i].descripcion %></p>
 								<p>Fecha de carga: <%= mostCommentedProducts[i].createdAt %></p>
-								<p>Comentarios: <%= mostCommentedProducts[i].comentario.comentario  %></p>
+								<p>Comentarios: <%= mostCommentedProducts[i].comentario.length  %></p>
 							</article>
 						</a>
 					</section>

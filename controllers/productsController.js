@@ -49,14 +49,15 @@ const controller = {
 
   procesarAdd: function(req, res, next) {
     let productadd = req.body
-    let add = {
-      usuario_id: productadd.session.id,
-      //imagen:
+    //console.log(req.session.user.id);
+    producto.create({
+      //usuario_id: req.session.user.id,
+      imagen: productadd.imagen,
       nombre: productadd.nombreProducto,
       descripcion: productadd.descripcion,
       fecha: productadd.fecha
-    }
-    res.redirect('/product-add', {productadd, add})
+    })
+    res.redirect('/')
   },
   
   buscador: function(req, res, next) {

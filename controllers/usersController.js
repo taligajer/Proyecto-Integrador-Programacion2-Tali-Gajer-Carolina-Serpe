@@ -1,6 +1,6 @@
 const db = require('../database/models');
-const usuario = db.usuarios; 
-const productos = db.products;
+const Usuario = db.Usuario; 
+const productos = db.Product;
 const data = require('../data/data'); 
 //const productos = data.products;
 //const usersList = data.user;
@@ -12,6 +12,7 @@ const controller = {
   },
   procesarRegister: function (req, res) {
     let info = req.body;
+    console.log(info);
     //let criterio = {where: [{email: info.email}]}; 
     let errors = {};
   
@@ -19,7 +20,7 @@ const controller = {
       errors.message = "Hay un error. El email no puede estar vacio";
       res.locals.errors = errors; // validamos que no viene vacio
       return res.render("register");
-    } else if (info.contrasenia < 3) {
+    } else if (info.password < 3) {
       errors.message = "Hay un error. La contrasenia tiene que tener 3 caracteres o mas";
       res.locals.errors = errors;
       return res.render("register");
@@ -30,11 +31,11 @@ const controller = {
       let criterio = {
         where: [{ email: req.body.email }]
       };
-      usuario.findOne(criterio) //revisar porque no anda el findOne
-      .then((usuario) => {
+      Usuario.findOne(criterio) //revisar porque no anda el findOne
+      .then(usuario => {
         if (criterio != null) {
           //creamos el usuario
-          let contraseniahash = bcryptjs.hashSync(req.body.contrasenia, usuario.contrasenia);
+          let contraseniahash = bcryptjs.hashSync(info.password, 10);
           let user = {
             email: req.body.email,
             contrasenia: contraseniahash,
@@ -42,10 +43,10 @@ const controller = {
             fecha: req.body.fecha,
             dni: req.body.dni
           };
-          usuario.create(user); 
-          res.redirect('/indexx',{usuario: usuario});
+          Usuario.create(user);
+          res.redirect('/');
         } else {
-          errors.message = "El email ya existe";
+          errors.message = "El email ya existe"; //no me avisa si el email existe
           res.locals.errors = errors;
           res.render('register');
         }
@@ -77,44 +78,36 @@ const controller = {
         ]}
          
       },
-    Store : function(req, res, next){
+    procesarLogin: function(req, res, next){
       let errors = {};
       if (req.body.email == ""){
         errors.message = "El campo email esta vacio";
         res.locals.errors = errors;
         res.render("register")
       }
-      else if (req.body.contrasenia == " "){
+      else if (req.body.password == ""){
         errors.message = "El campo contrasenia esta vacio";
         res.locals.errors = errors;
         res.render("register")
       }
       else{
         let criterio = {
-          email: req.body.email}
-       
+          email: req.body.email}    
 
-      usuario.findOne({
+      Usuario.findOne({
         criterio
       }).then(usuario => {
-        if (usuario == null) {
-        //creamos el usuario\\
-        let contraseniahash = bcryptjs.hashSync(req.body.contrasenia, usuario.contrasenia);
-        let user = {
-          email: req.body.email,
-          contrasenia: contraseniahash,
-          fotoPerfil: req.body.fotoPerfil,
-          fecha: req.body.fecha,
-          dni: req.body.dni
-          
-        }
-        usuario.create(user);
-        res.redirect('/profile')
-        } else {
-          errors.message = "El email ya existe";
+        if(usuario != null) {
+          let contraseniacompare = bcryptjs.compareSync(req.body.contrasenia, usuario.contrasenia);
+        if(contraseniacompare == true){
+          req.session.user = usuario;
+          res.locals.user= usuario;
+          return res.redirect('/') //no me redirecciona
+        } 
+        else {
+          errors.message = "El email no existe";
           res.locals.errors = errors;
-          res.render('register')
-          
+          return res.render('register')
         }
         
         // if(check){
@@ -134,8 +127,8 @@ const controller = {
         //   res.render("register");//cambiar la vista 
         // }
         
-      }).catch(errors=>{
-        res.render(errors)
+      }}).catch(errors => {
+        res.send(errors)
       })
     
       }
@@ -143,7 +136,7 @@ const controller = {
     login: function (req, res) {
       res.render("login")
     },
-    procesarLogin: function(req, res) {
+    hola: function(req, res) {
       let info = req.body;
       let criterioLogin = {where: [{email: info.email}]} ;
       let errors = {};
