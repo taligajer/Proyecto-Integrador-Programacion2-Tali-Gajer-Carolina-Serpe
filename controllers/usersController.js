@@ -1,9 +1,7 @@
 const db = require('../database/models');
 const Usuario = db.Usuario; 
-const productos = db.Product;
-const data = require('../data/data'); 
-//const productos = data.products;
-//const usersList = data.user;
+const Producto = db.Product;
+const data = require('../data/data');
 const bcryptjs = require('bcryptjs');
 
 const controller = { 
@@ -15,7 +13,7 @@ const controller = {
     console.log(info);
     //let criterio = {where: [{email: info.email}]}; 
     let errors = {};
-  
+
     if (info.email == "") {
       errors.message = "Hay un error. El email no puede estar vacio";
       res.locals.errors = errors; // validamos que no viene vacio
@@ -31,9 +29,10 @@ const controller = {
       let criterio = {
         where: [{ email: req.body.email }]
       };
-      Usuario.findOne(criterio) //revisar porque no anda el findOne
+
+      Usuario.findOne(criterio)
       .then(usuario => {
-        if (criterio != null) {
+        if (usuario == null) {
           //creamos el usuario
           let contraseniahash = bcryptjs.hashSync(info.password, 10);
           let user = {
@@ -46,49 +45,46 @@ const controller = {
           Usuario.create(user);
           res.redirect('/');
         } else {
-          errors.message = "El email ya existe"; //no me avisa si el email existe
+          errors.message = "El email ya existe";
           res.locals.errors = errors;
-          res.render('register');
+          res.render('login');
         }
       });
-    }
-  },
+    }},
   
-    //la ruta handlea /users 
-    /*users: function(req, res, next) {
-      const usersList = usuario;
-        res.render('profile', { title: 'users', usersList:usersList /})}*/
-      //
-    // /users/profile 
-
-    /*usersPost: function(req, res, next) {
-      res.send(req.body)
-        res.render('users', { title: 'users', usersList:usersList });
-      },*/
-
-    profile: function(req, res, next) {
-      const newProducts = productos;
+  profile: function(req, res, next) {
       let id = req.params.id;
       let relaciones = {
         include: [
           {association: 'usuarioComentario'}, 
-          {association: 'producto', include:[{association: 'producto'}]
-        
-        }
+          {association: 'usuarios', include:[{association: 'comentario'}]}
         ]}
-         
-      },
-    procesarLogin: function(req, res, next){
+      Usuario.findByPk(id,relaciones)
+      .then(function(data){
+        let newProducts = data
+        return res.render('profile', {newProducts:data})
+      })
+      .catch(function(error){
+        console.log(error);
+      })
+  },
+      
+
+  login: function (req, res) {
+      res.render("login")
+     },
+
+  procesarLogin: function(req, res, next){
       let errors = {};
       if (req.body.email == ""){
         errors.message = "El campo email esta vacio";
         res.locals.errors = errors;
-        res.render("register")
+        res.render("login")
       }
       else if (req.body.password == ""){
         errors.message = "El campo contrasenia esta vacio";
         res.locals.errors = errors;
-        res.render("register")
+        res.render("login")
       }
       else{
         let criterio = {
@@ -100,42 +96,24 @@ const controller = {
         if(usuario != null) {
           let contraseniacompare = bcryptjs.compareSync(req.body.contrasenia, usuario.contrasenia);
         if(contraseniacompare == true){
-          req.session.user = usuario;
-          res.locals.user= usuario;
+          req.session.user = usuario.dataValues;
+          res.locals.user= usuario.dataValues;
+          //if(req.body.recordarme){
+            //res.cookie("userId",usuario.dataValues.id,{maxAge:1000 *60 *10})
+          //}
           return res.redirect('/') //no me redirecciona
         } 
-        else {
+      else {
           errors.message = "El email no existe";
           res.locals.errors = errors;
           return res.render('register')
         }
-        
-        // if(check){
-        //   req.session.usuario = usuario.dataValues;
-        //   req.locals.usuario = user.dataValues;
-        //   if(req.body.recordarme === 'on'){
-        //     res.cookie("userId",user.dataValues.id,{maxAge:1000 *60 *10})
-          // }
-          // return res.render('profile', { title: 'users', username: user.email, newProducts, usersList });
-        // }
-        // else{
-          
-        //   errors.message = "Contraseña no coincide";
-        //   //Asignamos a locals.error el objeto errors 
-        //   res.locals.errors = errors;
-        //   //renderizamos la vista con el error
-        //   res.render("register");//cambiar la vista 
-        // }
-        
       }}).catch(errors => {
         res.send(errors)
-      })
+      })}},
+
+      
     
-      }
-    },
-    login: function (req, res) {
-      res.render("login")
-    },
     hola: function(req, res) {
       let info = req.body;
       let criterioLogin = {where: [{email: info.email}]} ;
@@ -167,16 +145,15 @@ const controller = {
           }) .catch(function(errors){
             console.log(errors)
           })
-      }
-    },
+      }},
+
     logout: function(req, res) {
       let info = req.body;
       if (info.logout != undefined){
         req.session.destroy();
         req.clearCookie("userId");
         return res.redirect("/indexx");
-      }
-    },
+      }},
 
     // /users/profile/profile-edit
     //profileEdit: function(req, res, next) {
@@ -195,3 +172,16 @@ module.exports = controller;
 //const data = require('../data/data');
 //const productoss = data.products; 
 //const userr = data.user; 
+
+
+//la ruta handlea /users 
+/*users: function(req, res, next) {
+  const usersList = usuario;
+        res.render('profile', { title: 'users', usersList:usersList /})}*/
+      //
+    // /users/profile 
+
+    /*usersPost: function(req, res, next) {
+      res.send(req.body)
+        res.render('users', { title: 'users', usersList:usersList });
+      },*/

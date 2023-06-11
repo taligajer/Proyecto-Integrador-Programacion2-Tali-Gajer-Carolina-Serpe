@@ -28,4 +28,18 @@ app.use('/products', productsRouter);
 app.use('/users', usersRouter)
 app.use(express.static(__dirname + '/public/css')) 
 
+app.use(session({
+    secret: "Mensaje secreto",
+    resave: false,
+    saveUninitialized: true
+}));
+
+app.use(function (req,res,next) {
+    if(req.session.user != undefined){
+      res.locals.user = req.session.user;
+    }
+    next();
+})
+
+
 module.exports = app;
