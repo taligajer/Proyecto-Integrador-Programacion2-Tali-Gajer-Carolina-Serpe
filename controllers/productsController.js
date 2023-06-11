@@ -58,15 +58,15 @@ const controller = {
     let productadd = req.body
     if (req.session.user != undefined){
       let producto = {
-      //idUsuario: req.session.userId,
-      imagen: productadd.imagen,
-      nombre: productadd.nombreProducto,
-      descripcion: productadd.descripcion,
-      fecha: productadd.fecha
+        userId: req.session.user.id,
+        imagen: productadd.imagen, // falta agregar imagen añadiendo el archivo a /public/images/products
+        nombreProducto: productadd.nombreProducto,
+        descripcion: productadd.descripcion,
       }
+
       Producto.create(producto)
       .then(function(product){
-        res.redirect('/')
+        return res.redirect('/products/' + product.dataValues.id)
       })
       .catch(function(error){
         console.log(error);

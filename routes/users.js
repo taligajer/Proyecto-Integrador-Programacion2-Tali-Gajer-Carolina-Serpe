@@ -14,7 +14,7 @@ router.post('/register', controller.procesarRegister);
 router.get('/login', controller.login);
 router.post('/login', controller.procesarLogin);// cambiar por otra 
 
-router.get('/logout', controller.logout); // crear lo que dice logout en el headerLogueado
+router.post('/logout', controller.logout); // crear lo que dice logout en el headerLogueado
 
 /* GET users listing. */
 /*router.get('/', controller.users);

@@ -47,12 +47,10 @@
 			<nav class="main-navbar">
 				<ul class="left-navbar">
 					<li><a href="/">Todos los productos</a></li>
-					<li><a href="/products/product-add">Cargar productos</a></li>
 				</ul>
 
-
 				<ul class="right-navbar">
-					<% if (locals.user == undefined) { %> <!-- Si el usuario no inicio sesión -->
+					<% if (user == undefined) { %> <!-- Si el usuario no inicio sesión -->
 						<a href="../register.ejs">Creá tu cuenta <i class="far fa-address-card"></i></a>
 						</li>
 						<li>
@@ -60,12 +58,12 @@
 						</li>
 					  <% } else { %> <!-- Si el usuario ya inicio sesión -->
 						<li>
-						  <h3>Hola <%= locals.user.email %></h3> <!-- Saluda al usuario -->
-						  <a href="../profile/<%= locals.user.id %>">Mi perfil</a> <!-- Enlazar al perfil del usuario -->
-						  <a href="../product-add">Agregar producto</a> <!-- Enlazar a la página de agregar producto -->
+						  <h3>Hola <%= user.email %></h3> <!-- Saluda al usuario -->
+						  <a href="/users/profile">Mi perfil</a> <!-- Enlazar al perfil del usuario -->
+						  <a href="/products/product-add">Agregar producto</a> <!-- Enlazar a la página de agregar producto -->
 						</li>
 						<li>
-						  <form action="/logout" method="post"> <!-- Formulario para cerrar sesión -->
+						  <form action="/users/logout" method="post"> <!-- Formulario para cerrar sesión -->
 							<button class="logout" type="submit">Cerrar sesión <i class="fas fa-sign-in-alt"></i></button>
 						  </form>
 						</li>

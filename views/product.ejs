@@ -6,7 +6,12 @@
 </head>
 <body>
 	<!-- Header -->
-	<%- include('./partials/header') %>
+	<!--include('./partials/header') -->
+	<% if (locals.user != null) { %> <!--evalua si el usuario esta logueado-->
+		<%- include('./partials/headerLogueado') %>
+	  <% } else { %>
+		<%- include('./partials/header') %>
+	  <% } %>
 	<!-- /Header -->
 	
 	<!-- product detail -->

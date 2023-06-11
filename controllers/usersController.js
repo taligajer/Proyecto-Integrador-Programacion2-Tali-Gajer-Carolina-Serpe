@@ -22,9 +22,10 @@ const controller = {
       errors.message = "Hay un error. La contrasenia tiene que tener 3 caracteres o mas";
       res.locals.errors = errors;
       return res.render("register");
-    } else if (info.fecha == " ") {
+    } else if (info.fecha == "") {
       errors.message = "Hay un error. El campo de fecha no puede estar vacio";
       res.locals.errors = errors;
+      return res.render("register");
     } else {
       let criterio = {
         where: [{ email: req.body.email }]
@@ -42,27 +43,37 @@ const controller = {
             fecha: req.body.fecha,
             dni: req.body.dni
           };
-          Usuario.create(user);
-          res.redirect('/');//crear session por eso session esta vacio
+          // creamos el usuario y esperamos la creacion del mismo para obtener el ID
+          Usuario.create(user).then(usuario => {
+            req.session.user = {
+              email: usuario.dataValues.email,
+              id: usuario.dataValues.id
+            };
+            res.locals.user = usuario.dataValues;
+            return res.redirect('/');
+          });
         } else {
           errors.message = "El email ya existe";
           res.locals.errors = errors;
-          res.render('login');
+          return res.render('register');
         }
       });
     }},
   
   profile: function(req, res, next) {
-      let id = req.params.id;
-      let relaciones = {
+      let id = req.session.user.id;
+      let criterio = {
         include: [
-          {association: 'usuarioComentario'}, 
-          {association: 'usuarios', include:[{association: 'comentario'}]}
-        ]}
-      Usuario.findByPk(id,relaciones)
+          { 
+            association: 'usuarioProducto',
+          }
+        ],
+        order: [[{model: Producto, as: 'usuarioProducto'}, 'createdAt', 'DESC']]
+      };
+
+      Usuario.findByPk(id, criterio)
       .then(function(data){
-        let newProducts = data
-        return res.render('profile', {newProducts:data})
+        return res.render('profile', {products: data.dataValues.usuarioProducto})
       })
       .catch(function(error){
         console.log(error);
@@ -79,81 +90,57 @@ const controller = {
       if (req.body.email == ""){
         errors.message = "El campo email esta vacio";
         res.locals.errors = errors;
-        res.render("login")
+        return res.render("login")
       }
       else if (req.body.password == ""){
         errors.message = "El campo contrasenia esta vacio";
         res.locals.errors = errors;
-        res.render("login")
+        return res.render("login")
       }
       else{
         let criterio = {
-          email: req.body.email}    
-
-      Usuario.findOne({
-        criterio
-      }).then(usuario => {
+          where: [{ email: req.body.email }]
+        };
+      Usuario.findOne(criterio).then(usuario => {
+        let contraseniacompare = false;
         if(usuario != null) {
-          let contraseniacompare = bcryptjs.compareSync(req.body.contrasenia, usuario.contrasenia);
+          contraseniacompare = bcryptjs.compareSync(req.body.contrasenia, usuario.contrasenia);
+        }
         if(contraseniacompare == true){
-          req.session.user = usuario.dataValues;
+          req.session.user = {
+            email: usuario.dataValues.email,
+            id: usuario.dataValues.id
+          };
           res.locals.user= usuario.dataValues;
-          //if(req.body.recordarme){
-            //res.cookie("userId",usuario.dataValues.id,{maxAge:1000 *60 *10})
-          //}
+          if(req.body.recordarme){
+            res.cookie("user", {email: usuario.dataValues.email, id: usuario.dataValues.id}, {maxAge: 1000 * 60 * 60 * 24 * 7})
+          }
           return res.redirect('/') //no me redirecciona
         } 
-      else {
+        else {
           errors.message = "El email no existe";
           res.locals.errors = errors;
-          return res.render('register')
+          return res.render('login')
         }
-      }}).catch(errors => {
+      }).catch(errors => {
         res.send(errors)
       })}},
 
-      
-    
-    hola: function(req, res) {
-      let info = req.body;
-      let criterioLogin = {where: [{email: info.email}]} ;
-      let errors = {};
-      if (info.email == "") {
-        errors.message= "Hay un error. El email no puede estar vacio";
-        res.locals.errors = errors; 
-        return res.render("login");
-      }else{
-        usuario.findOne(
-          {criterioLogin
-          }).then(usuario => {
-            if (usuario == null) {
-              let check = bcryptjs.compareSync(info.contrasenia, usuario.contrasenia);
-              if (check) {
-                req.session.user = usuario.dataValues;
-                if (info.remember != undefined) {
-                  res.cookie('userId', usuario.dataValues.id, {
-                    maxAge: 1000 * 60 * 1000,
-                  });
-                }
-                return res.redirect("indexx") // lo redirecciona al indexx
-              } else {
-                  errors.message = "La clave es incorrecta";
-                  res.locals.errors = errors;
-                  return res.render("login");
-               }
-              }
-          }) .catch(function(errors){
-            console.log(errors)
-          })
-      }},
-
     logout: function(req, res) {
-      let info = req.body;
-      if (info.logout != undefined){
-        req.session.destroy();
-        req.clearCookie("userId");
-        return res.redirect("/indexx");
-      }},
+      if (req.session.user) {
+        req.session.destroy(function(err) {
+          if (err) {
+            return next(err);
+          } else {
+            return res.redirect('/');
+          }
+        });
+
+        res.clearCookie('user');
+      } else {
+        return res.redirect('/');
+      }
+    },
 
     // /users/profile/profile-edit
     //profileEdit: function(req, res, next) {
