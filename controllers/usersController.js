@@ -44,7 +44,7 @@ const controller = {
             dni: req.body.dni
           };
           Usuario.create(user);
-          res.redirect('/');
+          res.redirect('/');//crear session por eso session esta vacio
         } else {
           errors.message = "El email ya existe"; //no me avisa si el email existe
           res.locals.errors = errors;

@@ -52,26 +52,25 @@
 
 
 				<ul class="right-navbar">
-						<li>
-							<% if (locals.user == undefined) { %>
-						<a href="../register.ejs">Creá tu cuenta <i class="far fa-address-card"></i>
-						</a>
+					<% if (locals.user == undefined) { %> <!-- Si el usuario no inicio sesión -->
+						<a href="../register.ejs">Creá tu cuenta <i class="far fa-address-card"></i></a>
 						</li>
 						<li>
-						<a href="../login.ejs">Ingresá <i class="fas fa-sign-in-alt"></i></a>
-						</li> <%} else{%>
-							<li>
-								<h3>Hola <%= locals.usuario.email %></h3>
-								<a href = "../profile.ejs/"<%=usuario.id%>> Mi perfil</a> <!--ESTE NO ANDA-->
-								<a href="../product-add.ejs">Agergar producto</a>
-							</li>
+						  <a href="../login.ejs">Ingresá <i class="fas fa-sign-in-alt"></i></a>
+						</li>
+					  <% } else { %> <!-- Si el usuario ya inicio sesión -->
 						<li>
-							<form action="/" method="get">
-								<button class="logout" type="submit">
-								Cerrar sesión <i class="fas fa-sign-in-alt"></i>
-								</button>
-							</form>
-						</li><%}%>
+						  <h3>Hola <%= locals.user.email %></h3> <!-- Saluda al usuario -->
+						  <a href="../profile/<%= locals.user.id %>">Mi perfil</a> <!-- Enlazar al perfil del usuario -->
+						  <a href="../product-add">Agregar producto</a> <!-- Enlazar a la página de agregar producto -->
+						</li>
+						<li>
+						  <form action="/logout" method="post"> <!-- Formulario para cerrar sesión -->
+							<button class="logout" type="submit">Cerrar sesión <i class="fas fa-sign-in-alt"></i></button>
+						  </form>
+						</li>
+					  <% } %>
+					  
 				</ul>
 			</nav>	
 		</div>

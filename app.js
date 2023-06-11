@@ -25,7 +25,8 @@ app.use(session({secret:"nuestro mensaje secreto",
 
 app.use('/', indexRouter); 
 app.use('/products', productsRouter); 
-app.use('/users', usersRouter)
+app.use('/users', usersRouter);
+
 app.use(express.static(__dirname + '/public/css')) 
 
 module.exports = app;
