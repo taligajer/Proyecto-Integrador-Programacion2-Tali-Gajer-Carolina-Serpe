@@ -23,6 +23,31 @@
 					<img src="/images/products/<%=data[0].nombreProducto %>.jpeg" alt="" class="product-detail-img">
 					<p class="product-detail-description">
 						<%=data[0].descripcion %></p>
+					<p> <%= data[0].usuarios.email %></p>
+				</article>
+				<div class="col-12 col-lg-4">
+					<section class="comments">
+						<% for(let i = 0; i < data[0].comentario.length; i++) { %>
+							<article>
+								<img src= "<%= data[0].usuarios.fotoPerfil %>" alt= "Imagen de perfil" + <%=data[0].usuarios.email%> > 
+								<div class="data">
+									<p class="user">
+									<strong> <a href="/users/profile"><%= data[0].usuarios.email %></a> </strong>
+									 <%= data[0].comentario[i].comentario %></p>
+								</div>
+							</article>
+						<% } %>	
+					</section>
+					<form class="form" action="" method="get">
+						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
+						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
+					</form>
+					<hr>
+				</div>
+			</div>
+		</div>
+	</div>
+			
 					
 	<!-- /product detail -->
 

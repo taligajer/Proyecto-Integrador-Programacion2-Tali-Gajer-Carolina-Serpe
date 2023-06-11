@@ -32,10 +32,11 @@
 											<img src="/images/products/<%= data[i].nombreProducto %>.jpeg" alt="<%= data[i].nombreProducto %>">
 										</figure>
 										<article class="product-box_data">
-											<h2><%= data[i].nombreProducto %></h2> 
+											<h2><%= data[i].nombreProducto %></h2>
 											<p><%= data[i].descripcion %></p>
-											<p>Fecha de carga: <%= data[i].fechaCarga %></p>
-											<p>Comentarios: <%= data[i].comentarios %></p> 
+											<a href="/users/profile">Cargado por: <%= data[i].usuarios.email //definir ruta%></a>
+											<p>Fecha de carga: <%= data[i].createdAt %></p>
+											<p>Comentarios: <%= data[i].comentario.length  %></p>
 										</article>
 									</a>
 								</section>
