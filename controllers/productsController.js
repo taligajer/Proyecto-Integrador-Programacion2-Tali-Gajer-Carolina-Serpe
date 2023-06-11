@@ -1,7 +1,7 @@
 const db = require('../database/models');
-const producto = db.Product;
-const usuario = db.Usuario;
-const comentario = db.Comentario;
+const Producto = db.Product;
+const Usuario = db.Usuario;
+const Comentario = db.Comentario;
 const datajs = require('../data/data');
 const productos = datajs.products;
 const user = datajs.user;
@@ -41,7 +41,7 @@ const controller = {
     order: [['createdAt', 'DESC']] 
   }
 
-    producto.findOne(criterio)
+    Producto.findOne(criterio)
       .then(function (data) {
         return res.render("product", { title: "Con findOne", data: [data] })
 
@@ -54,23 +54,31 @@ const controller = {
     res.render('product-add', { title: 'products', newProducts, productName: productos.nombreProducto, username: user[0].usuario });
   },
 
-  procesarAdd: function (req, res, next) {
+  procesarAdd: function(req, res, next) {
     let productadd = req.body
-    //console.log(req.session.user.id);
-    producto.create({
-      //usuario_id: req.session.user.id,
+    if (req.session.user != undefined){
+      let producto = {
+      //idUsuario: req.session.userId,
       imagen: productadd.imagen,
       nombre: productadd.nombreProducto,
       descripcion: productadd.descripcion,
       fecha: productadd.fecha
-    })
-    res.redirect('/')
-  },
+      }
+      Producto.create(producto)
+      .then(function(product){
+        res.redirect('/')
+      })
+      .catch(function(error){
+        console.log(error);
+      })}
+    else {
+      res.redirect('/register')
+    }
+  },    
 
   buscador: function (req, res, next) {
 
     let busqueda = req.query.search
-
     let criterio = {
       where: {
         [op.or]: [
@@ -83,7 +91,7 @@ const controller = {
       {association: "usuarios"}],
       order:[['createdAt', 'DESC']]
     } 
-    producto.findAll(criterio)
+    Producto.findAll(criterio)
       .then(function (data) {
         res.render('search-results', { data: data })
       })
