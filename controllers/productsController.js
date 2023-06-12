@@ -36,19 +36,39 @@ const controller = {
     let id = req.params.id;
     let criterio = { 
     where: { id: id },
-    include:[{ association: "comentario" },
-        { association: "usuarios" }],
+    include:[{ association: "comentario", include:[{association:"usuarioComentario"}] },
+        { association: "usuarios" },
+        ],
     order: [['createdAt', 'DESC']] 
   }
-
     Producto.findOne(criterio)
       .then(function (data) {
-        return res.render("product", { title: "Con findOne", data: [data] })
-
+        //res.send(data)
+        res.render("product", { title: "Con findOne",data: [data]})        
       })
-      .catch(function (err) { console.log(err) })
+      .catch(function (err) { console.log(err)})
 
   },
+
+  procesarComentario:function (req,res,next) {
+    if (req.session.user != undefined){
+      let comentario = {
+        idUsuario: req.session.user.id,
+        comentario: req.body, //hay que ver como acceder a esto
+        idPost: req.params.id,
+      }
+      Comentario.create(comentario)
+      .then(function(product){
+        return res.redirect('/products/' + req.params.id)
+      })
+      .catch(function(error){
+        console.log(error);
+      })}
+    else {
+      res.redirect('/register')
+    }
+  },    
+
   productAdd: function (req, res, next) {
     const newProducts = productos;
     res.render('product-add', { title: 'products', newProducts, productName: productos.nombreProducto, username: user[0].usuario });
@@ -63,7 +83,6 @@ const controller = {
         nombreProducto: productadd.nombreProducto,
         descripcion: productadd.descripcion,
       }
-
       Producto.create(producto)
       .then(function(product){
         return res.redirect('/products/' + product.dataValues.id)
@@ -83,12 +102,13 @@ const controller = {
       where: {
         [op.or]: [
           { nombreProducto: { [op.like]: "%" + busqueda + "%" } },
-          { descripcion: { [op.like]: "%" + busqueda + "%" } }
+          { descripcion: { [op.like]: "%" + busqueda + "%" } },
         ]
       },
       include: 
       [{association: "comentario"},
-      {association: "usuarios"}],
+      {association: "usuarios"},
+      ],
       order:[['createdAt', 'DESC']]
     } 
     Producto.findAll(criterio)

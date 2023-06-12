@@ -34,22 +34,22 @@
 					<section class="comments">
 						<% for(let i = 0; i < data[0].comentario.length; i++) { %>
 							<article>
-								<img src= "<%= data[0].usuarios.fotoPerfil %>" alt= "Imagen de perfil" + <%=data[0].usuarios.email%> > 
+								<img src= "<%= data[0].comentario[i].usuarioComentario.fotoPerfil %>" alt= "Imagen de perfil" + <%=data[0].usuarios.email%> > 
 								<div class="data">
 									<p class="user">
-									<strong> <a href="/users/profile"><%= data[0].usuarios.email %></a> </strong>
+									<strong> <a href="/users/profile/<%= data[0].comentario[i].usuarioComentario.id %>"><%= data[0].comentario[i].usuarioComentario.email %></a> </strong>
 									 <%= data[0].comentario[i].comentario %></p>
 								</div>
 							</article>
 						<% } %>	
 					</section>
 					<% if (locals.user != null) { %> 
-						<form class="form" action="" method="get">
+						<form class="form" action="/products/<%=data[0].id %>" method="post">
 							<input class="form-input" type="text" value="" placeholder="Agregar comentario">
 							<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
 						</form>
 					  <% } else { %>
-						<a> Debe estar logueado para comentar </a>
+						<a href="http://localhost:3000/users/login">Debe estar logueado para comentar</a>
 					  <% } %>
 					<hr>
 				</div>

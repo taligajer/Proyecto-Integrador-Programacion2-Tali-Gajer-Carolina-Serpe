@@ -8,5 +8,6 @@ router.post('/product-add', controller.procesarAdd);
 router.get('/search-results', controller.buscador);
 
 router.get('/:id',controller.findOne);
+router.post('/:id',controller.procesarComentario);
 
 module.exports = router;
