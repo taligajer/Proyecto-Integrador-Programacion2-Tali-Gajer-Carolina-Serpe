@@ -61,13 +61,13 @@
 			<% for(let i = 0; i < mostCommentedProducts.length; i++) { %>
 				<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
-						<a href="/products/<%= newProducts[i].id %>">
+						<a href="/products/<%= mostCommentedProducts[i].id %>">
 							<figure class="product-box_image">
 								<img src= "/images/products/<%=mostCommentedProducts[i].nombreProducto %>.jpeg" alt=<%= mostCommentedProducts[i].alt %>>
 							</figure>
 							<article class="product-box_data">
 								<h2><%= mostCommentedProducts[i].nombreProducto %></h2>
-								<p><a href="users/profile"> Cargado por: <%= mostCommentedProducts[i].usuarios.email %></a></p>
+								<p><a href="users/profile/<%= newProducts[i].userId %>"> Cargado por: <%= mostCommentedProducts[i].usuarios.email %></a></p>
 								<p><%= mostCommentedProducts[i].descripcion %></p>
 								<p>Fecha de carga: <%= mostCommentedProducts[i].createdAt %></p>
 								<p>Comentarios: <%= mostCommentedProducts[i].comentario.length  %></p>
