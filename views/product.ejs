@@ -43,10 +43,14 @@
 							</article>
 						<% } %>	
 					</section>
-					<form class="form" action="" method="get">
-						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
-						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-					</form>
+					<% if (locals.user != null) { %> 
+						<form class="form" action="" method="get">
+							<input class="form-input" type="text" value="" placeholder="Agregar comentario">
+							<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
+						</form>
+					  <% } else { %>
+						<a> Debe estar logueado para comentar </a>
+					  <% } %>
 					<hr>
 				</div>
 			</div>
