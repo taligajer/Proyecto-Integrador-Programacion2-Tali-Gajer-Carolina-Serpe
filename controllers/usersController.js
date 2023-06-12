@@ -1,22 +1,22 @@
-const db = require('../database/models');
-const Usuario = db.Usuario; 
-const Producto = db.Product;
-const data = require('../data/data');
-const bcryptjs = require('bcryptjs');
+const db = require('../database/models'); //requerimos el modulo donde estan los modelos
+const Usuario = db.Usuario; //accedemos a db y nos traemos el modelo de alias Usuario
+const Producto = db.Product; //hacemos lo mismo aca
+const data = require('../data/data'); 
+const bcryptjs = require('bcryptjs'); //requerimos bryptjs
 
 const controller = { 
   register: function (req, res) {
     res.render("register")
   },
-  procesarRegister: function (req, res) {
-    let info = req.body;
+  procesarRegister: function (req, res) { 
+    let info = req.body; //trae los datos enviados del form de register
     console.log(info);
     //let criterio = {where: [{email: info.email}]}; 
     let errors = {};
-
+    //validaciones
     if (info.email == "") {
       errors.message = "Hay un error. El email no puede estar vacio";
-      res.locals.errors = errors; // validamos que no viene vacio
+      res.locals.errors = errors; 
       return res.render("register");
     } else if (info.password < 3) {
       errors.message = "Hay un error. La contrasenia tiene que tener 3 caracteres o mas";
@@ -28,14 +28,14 @@ const controller = {
       return res.render("register");
     } else {
       let criterio = {
-        where: [{ email: req.body.email }]
+        where: [{ email: req.body.email }]//busca si el usuario con ese mail ya esta en la base de datos 
       };
 
-      Usuario.findOne(criterio)
+      Usuario.findOne(criterio)//busca usuario que cumpla con ese criterio
       .then(usuario => {
         if (usuario == null) {
           //creamos el usuario
-          let contraseniahash = bcryptjs.hashSync(info.password, 10);
+          let contraseniahash = bcryptjs.hashSync(info.password, 10); //genera un hash de la contrasenia
           let user = {
             email: req.body.email,
             contrasenia: contraseniahash,
@@ -44,12 +44,12 @@ const controller = {
             dni: req.body.dni
           };
           // creamos el usuario y esperamos la creacion del mismo para obtener el ID
-          Usuario.create(user).then(usuario => {
-            req.session.user = {
+          Usuario.create(user).then(usuario => {//creamos el usuario en la base de datos 
+            req.session.user = {//se almacena en la sesion del usuario el email y el id 
               email: usuario.dataValues.email,
               id: usuario.dataValues.id
             };
-            res.locals.user = usuario.dataValues;
+            res.locals.user = usuario.dataValues;//almacena el valor que despues comparte con las vistas
             return res.redirect('/');
           });
         } else {
@@ -61,20 +61,20 @@ const controller = {
     }},
   
   profile: function(req, res, next) {
-      let id = req.session.user.id;
-      let criterio = {
+      let id = req.session.user.id;//obtenemos el id del usuario una vez ya logueado, su id esta guardada en la sesion
+      let criterio = {//define la consulta que hacemos de busqueda del usuario
         include: [
           { 
-            association: 'usuarioProducto',
+            association: 'usuarioProducto',//usamos la asociacion que esta definida en el modelo Usuario
           }
         ],
         order: [[{model: Producto, as: 'usuarioProducto'}, 'createdAt', 'DESC']]
       };
 
-      Usuario.findByPk(id, criterio)
+      Usuario.findByPk(id, criterio)//buscamos el usuario por su id y usamos el criterio de busqueda 
       .then(function(data){
-        return res.render('profile', {products: data.dataValues.usuarioProducto})
-      })
+        return res.render('profile', {products: data.dataValues.usuarioProducto})//accedemos a los datos del usuario encontrados en data.data...
+      })//usuarioProducto contiene los productos 
       .catch(function(error){
         console.log(error);
       })
@@ -101,21 +101,21 @@ const controller = {
         let criterio = {
           where: [{ email: req.body.email }]
         };
-      Usuario.findOne(criterio).then(usuario => {
+      Usuario.findOne(criterio).then(usuario => {//busca usuarios que cumplan con el criterio establecido 
         let contraseniacompare = false;
-        if(usuario != null) {
-          contraseniacompare = bcryptjs.compareSync(req.body.contrasenia, usuario.contrasenia);
+        if(usuario != null) {//si el usuario es distinto a null
+          contraseniacompare = bcryptjs.compareSync(req.body.contrasenia, usuario.contrasenia);//comparamos la contrasenia del form con la contrasenia de la base de datos 
         }
-        if(contraseniacompare == true){
+        if(contraseniacompare == true){//si las contrasenias coniciden se guarda la info del usuario en la sesion
           req.session.user = {
             email: usuario.dataValues.email,
             id: usuario.dataValues.id
           };
           res.locals.user= usuario.dataValues;
-          if(req.body.recordarme){
+          if(req.body.recordarme){//si campo recordarme esta marcado crea una cookie que contiene la info del usuario para mantener la session iniciada 
             res.cookie("user", {email: usuario.dataValues.email, id: usuario.dataValues.id}, {maxAge: 1000 * 60 * 60 * 24 * 7})
           }
-          return res.redirect('/') //no me redirecciona
+          return res.redirect('/') 
         } 
         else {
           errors.message = "El email no existe";
