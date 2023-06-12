@@ -61,11 +61,15 @@ const controller = {
     }},
   
   profile: function(req, res, next) {
-      let id = req.session.user.id;//obtenemos el id del usuario una vez ya logueado, su id esta guardada en la sesion
+      //let session = req.session.user.id;//obtenemos el id del usuario una vez ya logueado, su id esta guardada en la sesion
+      let id = req.params.id;
       let criterio = {//define la consulta que hacemos de busqueda del usuario
         include: [
           { 
             association: 'usuarioProducto',//usamos la asociacion que esta definida en el modelo Usuario
+          },
+          {
+            association: 'usuarioComentario',//usamos la asociacion que esta definida en el modelo Usuario
           }
         ],
         order: [[{model: Producto, as: 'usuarioProducto'}, 'createdAt', 'DESC']]
@@ -73,7 +77,7 @@ const controller = {
 
       Usuario.findByPk(id, criterio)//buscamos el usuario por su id y usamos el criterio de busqueda 
       .then(function(data){
-        return res.render('profile', {products: data.dataValues.usuarioProducto})//accedemos a los datos del usuario encontrados en data.data...
+        return res.render('profile', {usuario: data, products: data.usuarioProducto})//accedemos a los datos del usuario encontrados en data.data...
       })//usuarioProducto contiene los productos 
       .catch(function(error){
         console.log(error);

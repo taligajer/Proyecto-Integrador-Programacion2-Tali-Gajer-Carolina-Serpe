@@ -37,7 +37,7 @@
 							</figure>
 							<article class="product-box_data">
 								<h2><%= newProducts[i].nombreProducto %></h2>
-								<p><a href="users/profile"> Cargado por: <%= newProducts[i].usuarios.email %></a></p><!--muestra el email-->
+								<p><a href="users/profile/<%= newProducts[i].userId %>"> Cargado por: <%= newProducts[i].usuarios.email %></a></p><!--muestra el email-->
 								<p><%= newProducts[i].descripcion %></p>
 								<p>Fecha de carga: <%= newProducts[i].createdAt %></p>
 								<p>Comentarios: <%= newProducts[i].comentario.length %></p><!--cantidad de comentarios-->
