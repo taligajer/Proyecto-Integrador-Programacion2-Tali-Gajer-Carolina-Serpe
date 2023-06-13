@@ -7,7 +7,7 @@ router.get('/profile/:id', controller.profile);//ruta por GET que envia el formu
 router.post('/profile', controller.profile);//pedidos por POST mediante formularios (method = ‘post’).
 //Guardar, eliminar o borrar datos son las acciones que deben realizarse mediante una petición por post. 
 
-router.get('/profile-edit', controller.editProfile);
+router.get('/profile-edit/:id', controller.editProfile);
 router.post('/profile-edit', controller.procesarEditProfile);
 
 router.get('/search-users', controller.buscadorUsuario);

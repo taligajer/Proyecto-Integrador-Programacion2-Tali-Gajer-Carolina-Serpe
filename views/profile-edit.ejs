@@ -20,12 +20,13 @@
 				<h2 class="products-title">Editar mi perfil</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<form action="." method="get" class="formRegister">
-				<input type="email" name="email" id="email" placeholder="e-mail" class="input">
-				<input type="text" name="usuario" id="nombre de usuario" placeholder="Nombre de Usuario" class="input">
-				<input type="password" name="contraseña" id="contraseña" placeholder="Contraseña" class="input">
-				<input type="date" name="fecha" id="fecha de nacimiento" placeholder="Fecha de nacimiento" class="input">
-				<input type="number" name="dni" id="dni" placeholder="DNI" class="input">
+			<form action="/users/profile-edit" method="post" class="formRegister">
+				<input type="email" name="email" id="email" placeholder="e-mail" class="input" value="<%= usuario.email %>">
+				<input type="text" name="usuario" id="nombre de usuario" placeholder="Nombre de Usuario" class="input" value="<%= usuario.usuario %>">
+				<input type="password" name="contraseña" id="contraseña" placeholder="Contraseña" class="input" value="<%= usuario.contraseña %>">
+				<input type="date" name="fecha" id="fecha de nacimiento" placeholder="Fecha de nacimiento" class="input"><!--no pongo nada en value-->
+				<input type="number" name="dni" id="dni" placeholder="DNI" class="input" value="<%= usuario.dni %>">
+				<input type="text" name="id" hidden>
 				<input type="text" name="fotoPerfil" id="foto de perfil" placeholder="Foto de perfil" class="input">
 				<input type="submit" value="Enviar" class="input">
 			</form>

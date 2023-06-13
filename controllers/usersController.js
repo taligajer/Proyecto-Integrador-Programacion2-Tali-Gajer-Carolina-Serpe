@@ -88,7 +88,12 @@ const controller = {
   },
 
   editProfile: function(req, res, next) {
-    res.render('profile-edit')
+    let id = req.params.id
+    Usuario.findByPk(id)
+    .then(function(data) {
+      res.render('profile-edit', {usuario: data})
+    })
+    
   },
 
   procesarEditProfile:function(req, res, next) {//falta terminar 
@@ -101,7 +106,7 @@ const controller = {
       dni: req.body.dni,
       fotoPerfil: req.body.fotoPerfil
   }
-  Usuario.update(editProfile).then(function(product){
+  Usuario.update(editProfile, {where:{id:req.body.id}}).then(function(product){
     return res.redirect('/profile')
   })
   .catch(function(error) {
