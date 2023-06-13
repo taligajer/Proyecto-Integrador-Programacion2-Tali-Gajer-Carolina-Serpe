@@ -562,4 +562,11 @@ textarea.form-input {
     width: 95%;
     margin: auto;
   }
+
+  .product-box{
+    background-color: lightblue;
+    color: black;
+    margin: 10px;
+
+  }
 }

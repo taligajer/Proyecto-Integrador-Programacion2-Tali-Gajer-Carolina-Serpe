@@ -61,25 +61,8 @@ ingresar:(req,res)=>{
       )
       res.redirect('/users/headerLogueado');
 }, // consultar a Luis 
+}
 
-searchresults: function(req, res) {
-  const busqueda = req.query.search;
-  console.log(busqueda);
-  Product.findAll({
-    where: {
-      [op.or]: [
-        { producto: { [op.like]: `%${busqueda}%` } },
-        { descripcion: { [op.like]: `%${busqueda}%` } },
-      ],
-    },
-    include: [{association: "usuarios"},],
-    order: [['createdAt', 'DESC']],
-  })
-    .then(result => {
-      if (result) {
-        res.render('search-results', {resultado: result, palabraBuscada:busqueda}); //PREGUNTAR
-      }})
-}
-}
+
 
 module.exports = controlador;

@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <%- include("./partials/head.ejs")  %>
 </head>
+<header>
+    <% if (locals.user != null) { %> <!--evalua si el usuario esta logueado-->
+		<%- include('./partials/headerLogueado') %>
+	  <% } else { %>
+		<%- include('./partials/header') %>
+	  <% } %>
+</header>
 <body>
-    <ul>
-        <li><% if (data.length === 0) { %>
+    <div>
+    <% if (data.length === 0) { %>
             <h2>No hay resultados para su criterio de búsqueda</h2>
         <% } else { %>
             <% for (let i = 0; i < data.length; i++) { %>
                 <div class="col-12 col-sm-6 col-lg-3">
                     <section class="product-box">
-                        <a href="/users/profile/<%= data[i].dataValues.email %>">usuario <% =data[i].dataValues.email%></a>
+                        <figure class="product-box_image">
+                            <div class="img-container offset-3 col-2">
+                                <img src="<%= data.fotoPerfil %>" alt="foto de perfil" class="foto-perfil">
+                            </div>
+                        </figure>
+                        <article class="product-box_data">
+                            <a href="/users/profile/<%= data[i].id %>"> <%= data[i].dataValues.email%></a>
+                        </article>
                         </a>
                     </section>
                 </div>
+            </div>
             <% } %>
-        <% } %></li>
-    </ul>
+        <% } %>
+    </div>
 </body>
 </html>
