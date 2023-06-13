@@ -3,6 +3,7 @@ const Usuario = db.Usuario; //accedemos a db y nos traemos el modelo de alias Us
 const Producto = db.Product; //hacemos lo mismo aca
 const data = require('../data/data'); 
 const bcryptjs = require('bcryptjs'); //requerimos bryptjs
+let op = db.Sequelize.Op
 
 const controller = { 
   register: function (req, res) {
@@ -77,14 +78,38 @@ const controller = {
 
       Usuario.findByPk(id, criterio)//buscamos el usuario por su id y usamos el criterio de busqueda 
       .then(function(data){
-        return res.render('profile', {usuario: data, products: data.usuarioProducto})//accedemos a los datos del usuario encontrados en data.data...
+        console.log(data.usuarioProducto);
+        // res.send(data)
+        return res.render('profile', {usuario: data})//accedemos a los datos del usuario encontrados en data.data...
       })//usuarioProducto contiene los productos 
       .catch(function(error){
         console.log(error);
       })
   },
-      
 
+  editProfile: function(req, res, next) {
+    res.render('profile-edit')
+  },
+
+  procesarEditProfile:function(req, res, next) {//falta terminar 
+    if(req.session.user != undefined){
+      let editProfile = {
+      email: req.body.email,
+      usuario: req.body.usuario,
+      contraseña: req.body.contraseña,
+      fecha: req.body.fecha,
+      dni: req.body.dni,
+      fotoPerfil: req.body.fotoPerfil
+  }
+  Usuario.update(editProfile).then(function(product){
+    return res.redirect('/profile')
+  })
+  .catch(function(error) {
+    console.log(error);
+  })}
+
+},
+      
   login: function (req, res) {
       res.render("login")
      },
@@ -146,6 +171,22 @@ const controller = {
       }
     },
 
+    buscadorUsuario: function (req, res, next) {//falta terminar (no aparece el nombre del usuario)
+
+      let busqueda = req.query.search
+      let criterio = {
+        where: {
+             email: { [op.like]: "%" + busqueda + "%" }
+        },
+      } 
+      Usuario.findAll(criterio)
+        .then(function (data) {
+          //res.send(data)
+          res.render('search-users', { data: data })
+        })
+    }
+  }
+
     // /users/profile/profile-edit
     //profileEdit: function(req, res, next) {
     //    res.render('profile-edit', {title: 'users', username: usuario[0].usuario})
@@ -153,7 +194,7 @@ const controller = {
    // headerLogueado: function(req, res, next) {
      // res.render('product-add', {title: 'users', username: usuario.usuario})
   //},
-}
+
 
 
 module.exports = controller;
