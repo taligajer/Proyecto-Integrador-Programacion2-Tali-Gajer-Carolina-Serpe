@@ -54,7 +54,7 @@ const controller = {
     if (req.session.user != undefined){
       let comentario = {
         idUsuario: req.session.user.id,
-        comentario: req.body, //hay que ver como acceder a esto
+        comentario: req.body.comentario, //hay que ver como acceder a esto
         idPost: req.params.id,
       }
       Comentario.create(comentario)
@@ -67,7 +67,7 @@ const controller = {
     else {
       res.redirect('/register')
     }
-  },    
+  },   
 
   productAdd: function (req, res, next) {
     const newProducts = productos;

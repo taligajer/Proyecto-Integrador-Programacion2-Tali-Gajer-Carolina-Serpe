@@ -45,9 +45,9 @@
 					</section>
 					<% if (locals.user != null) { %> 
 						<form class="form" action="/products/<%=data[0].id %>" method="post">
-							<input class="form-input" type="text" value="" placeholder="Agregar comentario">
+							<input class="form-input" type="text" name="comentario" placeholder="Agregar comentario">
 							<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-						</form>
+						  </form>
 					  <% } else { %>
 						<a href="http://localhost:3000/users/login">Debe estar logueado para comentar</a>
 					  <% } %>
