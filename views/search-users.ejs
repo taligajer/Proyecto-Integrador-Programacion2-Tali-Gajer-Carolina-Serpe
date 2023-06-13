@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li><% if (data.length === 0) { %>
+            <h2>No hay resultados para su criterio de búsqueda</h2>
+        <% } else { %>
+            <% for (let i = 0; i < data.length; i++) { %>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <section class="product-box">
+                        <a href="/users/profile/<%= data[i].dataValues.email %>">usuario <% =data[i].dataValues.email%></a>
+                        </a>
+                    </section>
+                </div>
+            <% } %>
+        <% } %></li>
+    </ul>
+</body>
+</html>

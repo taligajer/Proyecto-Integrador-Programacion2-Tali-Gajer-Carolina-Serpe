@@ -34,7 +34,7 @@
 					</div>
 					<div>
 						<ul class="">
-							<li><%= products.length %></li>
+							<li><%=usuario.usuarioProducto.length %></li>
 							<li>200 seguidores</li>
 							<li><%= usuario.usuarioComentario.length %></li>
 						</ul>
@@ -50,21 +50,21 @@
 		<div class="row">
 			<div class="col-12">
 				<h2 class="products-title">Mis productos</h2>
-				<h2 class="products-title">Total: <%= products.length %> productos</h2>
+				<h2 class="products-title">Total: <%= usuario.usuarioProducto.length %> productos</h2>
 			</div>
 			<!-- Show mis productos -->
 			<div class="row">
-				<% for(let i = 0; i < products.length; i++) { %>
+				<% for(let i = 0; i < usuario.usuarioProducto.length; i++) { %>
 					<div class="col-12 col-sm-6 col-lg-3">
 						<section class="product-box">
-							<a href="/products/<%= products[i].id %>"
+							<a href="/products/<%= usuario.usuarioProducto[i].id %>"
 								<figure class="product-box_image">
-									<img src="/images/products/<%=products[i].nombreProducto %>.jpeg" alt="<%=products[i].descripcion %>">
+									<img src="/images/products/<%=usuario.usuarioProducto[i].nombreProducto %>.jpeg" alt="<%=usuario.usuarioProducto[i].descripcion %>">
 								</figure>
 								<article class="product-box_data">
-									<h2><%= products[i].nombreProducto %></h2> 
-									<p><%= products[i].descripcion %></p>
-									<p>Fecha de carga: <%= products[i].createdAt %></p>
+									<h2><%= usuario.usuarioProducto[i].nombreProducto %></h2> 
+									<p><%= usuario.usuarioProducto[i].descripcion %></p>
+									<p>Fecha de carga: <%= usuario.usuarioProducto[i].createdAt %></p>
 								</article>
 							</a>
 						</section>

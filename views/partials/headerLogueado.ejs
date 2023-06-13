@@ -31,6 +31,13 @@
 						<button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
 					</form>
 				</div>
+				<div class="col-7 col-md-6">
+					<form action="/users/search-users?search=" method="GET" class="search-form">
+						<input type="text" name="search" placeholder="Buscar emails"
+							class="search-form_input">
+						<button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
+					</form>
+				</div>
 	
 				<div class="col-12 col-md-4">
 					<a class="main-header_credit-link">
@@ -59,7 +66,7 @@
 					  <% } else { %> <!-- Si el usuario ya inicio sesión -->
 						<li>
 						  <h3>Hola <%= user.email %></h3> <!-- Saluda al usuario -->
-						  <a href="/users/profile">Mi perfil</a> <!-- Enlazar al perfil del usuario -->
+						  <a href="/users/profile/<%=locals.user.id%>">Mi perfil</a> <!-- Enlazar al perfil del usuario -->
 						  <a href="/products/product-add">Agregar producto</a> <!-- Enlazar a la página de agregar producto -->
 						</li>
 						<li>
