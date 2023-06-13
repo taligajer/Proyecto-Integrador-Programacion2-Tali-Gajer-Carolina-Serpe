@@ -43,7 +43,6 @@ const controller = {
   }
     Producto.findOne(criterio)
       .then(function (data) {
-        //res.send(data)
         res.render("product", { title: "Con findOne",data: [data]})        
       })
       .catch(function (err) { console.log(err)})
@@ -54,7 +53,7 @@ const controller = {
     if (req.session.user != undefined){
       let comentario = {
         idUsuario: req.session.user.id,
-        comentario: req.body.comentario, //hay que ver como acceder a esto
+        comentario: req.body.comentario,
         idPost: req.params.id,
       }
       Comentario.create(comentario)
@@ -93,7 +92,16 @@ const controller = {
     else {
       res.redirect('/register')
     }
-  },    
+  },
+  procesarEdit: function(req, res, next) {
+    let productEdit = req.body
+    if (req.session.user != undefined){
+      Producto.update({nombreProducto: productEdit.nombreProducto}, {where:{id:req.params.id}})
+      .then(function(){
+        return Producto.update({imagen: productEdit.imagen}, {where:{id:req.params.id}})})
+      .then(function(){
+        return Producto.update({descripcion: productEdit.descripcion}, {where:{id:req.params.id}})})
+  }},
 
   buscador: function (req, res, next) {
 
