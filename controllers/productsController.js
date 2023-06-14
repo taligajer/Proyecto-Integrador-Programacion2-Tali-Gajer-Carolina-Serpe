@@ -69,8 +69,8 @@ const controller = {
   },   
 
   productAdd: function (req, res, next) {
-    const newProducts = productos;
-    res.render('product-add', { title: 'products', newProducts, productName: productos.nombreProducto, username: user[0].usuario });
+    const newProducts = Producto;
+    res.render('product-add', { title: 'products', newProducts, productName: Producto.nombreProducto, username: user[0].usuario });
   },
 
   procesarAdd: function(req, res, next) {
@@ -93,15 +93,30 @@ const controller = {
       res.redirect('/register')
     }
   },
+
+  productEdit: function (req, res, next) {
+      Producto.findByPk(req.params.id)
+        .then(function (data) {
+    res.render('product-edit', { title: 'products', newProducts:data, productName: data.nombreProducto, username: user[0].usuario })});
+  },
+
   procesarEdit: function(req, res, next) {
     let productEdit = req.body
-    if (req.session.user != undefined){
-      Producto.update({nombreProducto: productEdit.nombreProducto}, {where:{id:req.params.id}})
-      .then(function(){
-        return Producto.update({imagen: productEdit.imagen}, {where:{id:req.params.id}})})
-      .then(function(){
-        return Producto.update({descripcion: productEdit.descripcion}, {where:{id:req.params.id}})})
-  }},
+    Producto.findByPk(req.params.id)
+      .then(function(producto){
+        if (req.session.user.id==producto.userId) {
+          return producto.update({
+            nombreProducto: productEdit.nombreProducto,
+            descripcion: productEdit.descripcion,
+            imagen: productEdit.imagen
+          })}
+        else {
+          return res.redirect('/users/login')
+        }})
+        .catch(function(error) {
+              console.log(error);
+            });
+    },
 
   buscador: function (req, res, next) {
 

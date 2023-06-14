@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 const controller = require('../controllers/productsController');
 
+router.get('/product-edit/:id', controller.productEdit);
 router.get('/product-add', controller.productAdd);
-router.get('/product-add/:id', controller.productAdd);
-router.post('/product-add/:id',controller.procesarEdit)
+router.post('/product-edit/:id',controller.procesarEdit);
 router.post('/product-add', controller.procesarAdd);
 
 
