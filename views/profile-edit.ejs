@@ -9,7 +9,11 @@
 <body>
 	<!-- Header -->
 	<header>
-	<%include("./partials/headerLogueado.ejs")%> 
+		<% if (locals.user != null) { %> <!--evalua si el usuario esta logueado-->
+			<%- include('./partials/headerLogueado') %>
+		  <% } else { %>
+			<%- include('./partials/header') %>
+		  <% } %>
 	</header>
 	<!-- /Header -->
 
