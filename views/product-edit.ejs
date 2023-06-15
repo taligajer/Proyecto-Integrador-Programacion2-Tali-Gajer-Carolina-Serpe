@@ -34,11 +34,12 @@
 							<input type="text" name="descripcion" id="descripcion" placeholder="Descripcion" class="input">
 						</div>
 						<div>
-							<input type="submit" value="Enviar" class="input">
+							<input type="submit" name="boton" value="Enviar" class="input">
 						</div>
-						
 					</form>
-				</div>
+					<form action="/products/product-edit/<%= newProducts.id%>" method="post">
+						<input type="submit" name="boton" value="Eliminar" class="input">
+					</form>
 			</h2>
 
 	<!-- footer -->
