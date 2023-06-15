@@ -105,11 +105,17 @@ const controller = {
     Producto.findByPk(req.params.id)
       .then(function(producto){
         if (req.session.user.id==producto.userId) {
-          return producto.update({
-            nombreProducto: productEdit.nombreProducto,
-            descripcion: productEdit.descripcion,
-            imagen: productEdit.imagen
-          })}
+          if (req.body.boton=='Enviar') {
+            return producto.update({
+              nombreProducto: productEdit.nombreProducto,
+              descripcion: productEdit.descripcion,
+              imagen: productEdit.imagen
+            })
+
+          }else {
+            return producto.destroy()
+          }
+          }
         else {
           return res.redirect('/users/login')
         }})
