@@ -106,8 +106,8 @@ const controller = {
       dni: req.body.dni,
       fotoPerfil: req.body.fotoPerfil
   }
-  Usuario.update(editProfile, {where:{id:req.body.id}}).then(function(product){
-    return res.redirect('/profile')
+  Usuario.update(editProfile, {where:{id:req.session.user.id}}).then(function(product){
+    return res.redirect('/users/profile/' + req.session.user.id)
   })
   .catch(function(error) {
     console.log(error);
