@@ -23,17 +23,35 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
-                
 app.use(function (req,res,next) {
     if(req.session.user != undefined){
         res.locals.user = req.session.user;
+        return next()
     } else if (req.cookies.user != undefined){
         req.session.user = req.cookies.user;
         res.locals.user = req.session.user;
     }
 
-    next();
+    return next();
 })
+
+app.use(function(req, res, next) {
+    if (req.cookies.user != undefined && req.session.user == undefined) { 
+        let idUsuarioEnCookie = req.cookies.user.id; //guardo el 
+        Usuario.findByPk(idUsuarioEnCookie)
+        .then((user) => {
+          req.session.user = user.dataValues;
+          res.locals.user  = user.dataValues;
+          return next();
+        }).catch((err) => {
+          console.log(err);
+          return next();
+        });
+    } else {
+      return next();
+    }
+  });
+  
 app.use('/', indexRouter); 
 app.use('/products', productsRouter); 
 app.use('/users', usersRouter);

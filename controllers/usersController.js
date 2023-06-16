@@ -20,7 +20,7 @@ const controller = {
       errors.message = "Hay un error. El email no puede estar vacio";
       res.locals.errors = errors; 
       return res.render("register");
-    } else if (info.password < 3) {
+    } else if (info.password.length < 3) {
       errors.message = "Hay un error. La contrasenia tiene que tener 3 caracteres o mas";
       res.locals.errors = errors;
       return res.render("register");
@@ -76,11 +76,11 @@ const controller = {
         ],
         order: [[{model: Producto, as: 'usuarioProducto'}, 'createdAt', 'DESC']]
       };
-
       Usuario.findByPk(id, criterio)//buscamos el usuario por su id y usamos el criterio de busqueda 
       .then(function(data){
-        console.log(data.usuarioProducto);
-        // res.send(data)
+
+        
+
         return res.render('profile', {usuario: data})//accedemos a los datos del usuario encontrados en data.data...
       })//usuarioProducto contiene los productos 
       .catch(function(error){
@@ -136,7 +136,7 @@ const controller = {
         let criterio = {
           where: [{ email: req.body.email }]
         };
-      Usuario.findOne(criterio).then(usuario => { //busca usuarios que cumplan con el criterio establecido 
+      Usuario.findOne(criterio).then(usuario => { //busca usuarios que cumplan con el criterio establecido
         let contraseniacompare = false;
         if(usuario != null) {
           contraseniacompare = bcryptjs.compareSync(req.body.contrasenia, usuario.contrasenia);//comparamos la contrasenia del form con la contrasenia de la base de datos 

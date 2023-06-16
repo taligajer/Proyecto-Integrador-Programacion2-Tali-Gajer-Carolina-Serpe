@@ -8,11 +8,7 @@ const user = datajs.user;
 const comentarios = datajs.comentarios;
 let op = db.Sequelize.Op
 
-
-
 const controller = {
-
-
   findOne: function (req, res, next) {
     let id = req.params.id;
     let criterio = { 
@@ -24,6 +20,7 @@ const controller = {
   }
     Producto.findOne(criterio)
       .then(function (data) {
+        // return res.send(data)
         res.render("product", { title: "Con findOne",data: [data]})        
       })
       .catch(function (err) { console.log(err)})
@@ -87,14 +84,16 @@ const controller = {
       .then(function(producto){
         if (req.session.user.id==producto.userId) {
           if (req.body.boton=='Enviar') {
-            return producto.update({
+            producto.update({
               nombreProducto: productEdit.nombreProducto,
               descripcion: productEdit.descripcion,
               imagen: productEdit.imagen
             })
+            return res.redirect('/products/' + req.params.id)
 
           }else {
-            return producto.destroy()
+            producto.destroy()
+            return res.redirect('/')
           }
           }
         else {

@@ -18,9 +18,11 @@
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
 			<h2 class="products-title"><%=data[0].nombreProducto %></h2> 
+		<% if (locals.user != undefined && locals.user.id == data[0].userId) { %>	
 			<p class="product-detail-description">
 				<a href="/products/product-edit/<%=data[0].id%>">Editar</a>
 			</p>
+		<% } %>
 		</div>
 		<div class="product-detail">
 			<div class="row">
