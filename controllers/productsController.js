@@ -9,25 +9,6 @@ const comentarios = datajs.comentarios;
 let op = db.Sequelize.Op
 
 
-/*const controlador = { 
-    //la ruta handlea /product 
-    product: function(req, res, next) {
-      //producto.findAll().then(result=>console.log(result))
-      console.log(producto);
-      const newProducts = productos;
-      const newComments = comentarios;
-        res.render('product', { title: "products", newProducts: data.slice(0,8), mostCommentedProducts: data.slice(0,8), productName: productos.nombreProducto, newComments});
-      },
-    // /product/product-add 
-
-    
-    // /product/search-results 
-    searchResults: function(req, res, next) {
-        res.render('search-results', { title: 'products' , newProducts: productos});
-      },
-} borrar despues de terminar controlador con db*/
-
-
 
 const controller = {
 

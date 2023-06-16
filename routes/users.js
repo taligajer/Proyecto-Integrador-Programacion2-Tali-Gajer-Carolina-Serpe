@@ -13,17 +13,13 @@ router.post('/profile-edit', controller.procesarEditProfile);
 router.get('/search-users', controller.buscadorUsuario);
 
 
-router.get('/register', controller.register); //este anda bien 
+router.get('/register', controller.register); 
 router.post('/register', controller.procesarRegister);
 
 router.get('/login', controller.login);
-router.post('/login', controller.procesarLogin);// cambiar por otra 
+router.post('/login', controller.procesarLogin);
 
-router.post('/logout', controller.logout); // crear lo que dice logout en el headerLogueado
+router.post('/logout', controller.logout); 
 
-/* GET users listing. */
-/*router.get('/', controller.users);
-router.get('/profile', controller.profile);
-router.get('/profile/profile-edit', controller.profileEdit)*/
 
 module.exports = router;

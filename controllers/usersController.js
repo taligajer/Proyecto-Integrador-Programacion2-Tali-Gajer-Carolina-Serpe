@@ -112,14 +112,13 @@ const controller = {
   .catch(function(error) {
     console.log(error);
   })}
-
 },
       
   login: function (req, res) {
       res.render("login")
      },
 
-  procesarLogin: function(req, res, next){
+     procesarLogin: function(req, res, next){
       let errors = {};
       if (req.body.email == ""){
         errors.message = "El campo email esta vacio";
@@ -135,19 +134,19 @@ const controller = {
         let criterio = {
           where: [{ email: req.body.email }]
         };
-      Usuario.findOne(criterio).then(usuario => {//busca usuarios que cumplan con el criterio establecido 
+      Usuario.findOne(criterio).then(usuario => { //busca usuarios que cumplan con el criterio establecido 
         let contraseniacompare = false;
-        if(usuario != null) {//si el usuario es distinto a null
+        if(usuario != null) {
           contraseniacompare = bcryptjs.compareSync(req.body.contrasenia, usuario.contrasenia);//comparamos la contrasenia del form con la contrasenia de la base de datos 
         }
-        if(contraseniacompare == true){//si las contrasenias coniciden se guarda la info del usuario en la sesion
-          req.session.user = {
+        if(contraseniacompare == true){ //si las contrasenias coniciden se guarda la info del usuario en la sesion
+          req.session.user = { //voy a guardar en la sesion los datos email y id del usuario
             email: usuario.dataValues.email,
             id: usuario.dataValues.id
           };
-          res.locals.user= usuario.dataValues;
-          if(req.body.recordarme){//si campo recordarme esta marcado crea una cookie que contiene la info del usuario para mantener la session iniciada 
-            res.cookie("user", {email: usuario.dataValues.email, id: usuario.dataValues.id}, {maxAge: 1000 * 60 * 60 * 24 * 7})
+          res.locals.user= usuario.dataValues; //para que ese dato se vea en todas las vistas
+          if(req.body.recordarme){ //si campo recordarme esta marcado crea una cookie que contiene la info del usuario para mantener la session iniciada 
+            res.cookie("user", {email: usuario.dataValues.email, id: usuario.dataValues.id}, {maxAge: 1000 * 60 * 5})
           }
           return res.redirect('/') 
         } 
@@ -176,7 +175,7 @@ const controller = {
       }
     },
 
-    buscadorUsuario: function (req, res, next) {//falta terminar (no aparece el nombre del usuario)
+    buscadorUsuario: function (req, res, next) {
 
       let busqueda = req.query.search
       let criterio = {
@@ -192,33 +191,4 @@ const controller = {
     }
   }
 
-    // /users/profile/profile-edit
-    //profileEdit: function(req, res, next) {
-    //    res.render('profile-edit', {title: 'users', username: usuario[0].usuario})
-    //},
-   // headerLogueado: function(req, res, next) {
-     // res.render('product-add', {title: 'users', username: usuario.usuario})
-  //},
-
-
-
 module.exports = controller;
-
-// chequear 
-//const usuarioo = db.Usuario;
-//const data = require('../data/data');
-//const productoss = data.products; 
-//const userr = data.user; 
-
-
-//la ruta handlea /users 
-/*users: function(req, res, next) {
-  const usersList = usuario;
-        res.render('profile', { title: 'users', usersList:usersList /})}*/
-      //
-    // /users/profile 
-
-    /*usersPost: function(req, res, next) {
-      res.send(req.body)
-        res.render('users', { title: 'users', usersList:usersList });
-      },*/

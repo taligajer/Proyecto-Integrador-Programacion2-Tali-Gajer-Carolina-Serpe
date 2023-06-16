@@ -1,7 +1,7 @@
 //Su responsabilidad es atender los distintos request del cliente y generar comunicación entre las vistas y los modelos.
 // chequear 
 const db = require('../database/models'); 
-const index = db.index;  //consultar Luis 
+const index = db.index;  
 const bcryptjs= require('bcryptjs');
 const Product = db.Product;
 const User = db.Usuario;
@@ -36,12 +36,7 @@ store: function (req, res){
   Usuario.create(user);
   res.redirect('/indexx')
 },
-//login: function (req, res) {
-  //res.render('login')
-//},
-//register: function (req, res) {
-  //res.render('register')
-//},
+
 ingresar:(req,res)=>{
   console.log(req.query)
   let passEncriptada = bcryptjs.hashSync(req.query.password, 12);
@@ -60,7 +55,7 @@ ingresar:(req,res)=>{
         }
       )
       res.redirect('/users/headerLogueado');
-}, // consultar a Luis 
+}, 
 }
 
 
