@@ -3,7 +3,8 @@ const Usuario = db.Usuario; //accedemos a db y nos traemos el modelo de alias Us
 const Producto = db.Product; //hacemos lo mismo aca
 const data = require('../data/data'); 
 const bcryptjs = require('bcryptjs'); //requerimos bryptjs
-let op = db.Sequelize.Op
+let op = db.Sequelize.Op //establecemos variable op para que acceda a los operadores
+//con sequelioze realizamos consultas y usamos operadores igual que mayor que 
 
 const controller = { 
   register: function (req, res) {
@@ -101,12 +102,13 @@ const controller = {
       let editProfile = {
       email: req.body.email,
       usuario: req.body.usuario,
-      contraseña: req.body.contraseña,
+      contraseña: req.body.contraseña,  
       fecha: req.body.fecha,
       dni: req.body.dni,
       fotoPerfil: req.body.fotoPerfil
   }
   Usuario.update(editProfile, {where:{id:req.session.user.id}}).then(function(product){
+    res.locals.user.email =  req.body.email 
     return res.redirect('/users/profile/' + req.session.user.id)
   })
   .catch(function(error) {
@@ -182,8 +184,8 @@ const controller = {
       let criterio = {
         where: {
              email: { [op.like]: "%" + busqueda + "%" }
-        },
-      } 
+        },//op.like busca registros en base a la coincidencia del mail
+      } //busca registros en la columna email. el % se usa para indicar que se buscan conicidencias en cualquier posicion
       Usuario.findAll(criterio)
         .then(function (data) {
           //res.send(data)
