@@ -102,7 +102,7 @@ const controller = {
       let editProfile = {
       email: req.body.email,
       usuario: req.body.usuario,
-      contraseña: req.body.contraseña,  
+      contrasenia: bcryptjs.hashSync(req.body.contraseña, 10),  
       fecha: req.body.fecha,
       dni: req.body.dni,
       fotoPerfil: req.body.fotoPerfil
