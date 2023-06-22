@@ -78,9 +78,6 @@ const controller = {
       };
       Usuario.findByPk(id, criterio)//buscamos el usuario por su id y usamos el criterio de busqueda 
       .then(function(data){
-
-        
-
         return res.render('profile', {usuario: data})//accedemos a los datos del usuario encontrados en data.data...
       })//usuarioProducto contiene los productos 
       .catch(function(error){
@@ -94,7 +91,6 @@ const controller = {
     .then(function(data) {
       res.render('profile-edit', {usuario: data})
     })
-    
   },
 
   procesarEditProfile:function(req, res, next) {//falta terminar 

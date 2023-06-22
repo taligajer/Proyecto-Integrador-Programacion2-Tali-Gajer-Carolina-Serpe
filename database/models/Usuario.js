@@ -1,4 +1,4 @@
-module.exports = function (sequelize, datatypes){
+module.exports = function (sequelize, datatypes){ //datatypes permite declarar que tipo de datos tienen los datos de las columnas de la tabla
     let alias = "Usuario";
     let cols = {
         id: {

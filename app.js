@@ -1,7 +1,9 @@
+//app js lugar donde siempre se ejecutan
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-const session = require('express-session');
+const session = require('express-session'); //requiero el modulo de sesion
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
@@ -19,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-    secret: "Mensaje secreto",
+    secret: "Mensaje secreto",//lo usa la sesion para armar el aloritmo que crea los identificadores
     resave: false,
     saveUninitialized: true
 }));
@@ -32,7 +34,7 @@ app.use(function (req,res,next) {
         res.locals.user = req.session.user;
     }
 
-    return next();
+    return next(); //segui de largo
 })
 
 app.use(function(req, res, next) {
@@ -50,7 +52,7 @@ app.use(function(req, res, next) {
     } else {
       return next();
     }
-  });
+  });// antes de las rutas, para que sepan que existe
   
 app.use('/', indexRouter); 
 app.use('/products', productsRouter); 
